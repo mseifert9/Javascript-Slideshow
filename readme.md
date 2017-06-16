@@ -5,64 +5,78 @@ The demo allows settings of all options and immediately viewing the results as w
 
 ## Overview
 ### Settings
-Options can be set for the following categories
-####Container:
+Settings are all passed in a single object. Below is a table of the setting property name and a description
 - Make Draggable
 - Make Resizable
 - Use document.body as the container
 - Center the slideshow
-- Set the container location and size (Height, Width, Top, Left)
 - Resize With Window - automatically adjust the container and image with change in the browser window size
 
-### Settings Defaults
--	slideshowHeight: undefined,	    // needed for document.body - otherwise resizes existing container
--	slideshowWidth: undefined,
--	slideshowTop: undefined,	    // positioning for existing container
--	slideshowLeft: undefined,
--	slideshowCenter: false,		    // true = center in window
--	slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
--	slideshowWrap: false,		      // go back to the beginning when reached the end of the images
--	ssTransitionSeconds: 1,		    // seconds for move slide transition
--	ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
--	ssPaddingTop: 5,		          // minimum padding between image and top of container
--	container: undefined,		      // if set, will use to host slide show. if not set, will use document.body
--	resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
--	playOnEnter: false,		        // true = will start slideshow when loads
--	showFilmstrip: true,		      // false = hide filmstrip
--	showFilmstripToggle: false,	  // true = auto show button that allows hide of filmstrip
--	showButtons: true,		        // false = hide button bar
--	showExitButton: true,		      // show an exit button on the button bar
--	showZoomButtons: true,		    // false = hide the zoom in out reset buttons
--	showPlayPauseButton: true,		// false = hide play / pause button, true = show play / pause button
--	showFullScreenButton: true,	  // show fullscreen button
--	showDownloadButton: false,	  // requires a link
--	showPrintButton: false,		    // requires a link
--	showOtherButton: false,		    // requires a link - custom use: e.g. Purchase, Feedback, ...
--	showLocateButton: false,	    // requires a link
--	showFirstLastButtons: true,	    // false = hide first and last buttons
--	showText: true,			    // false = hide text
--	linesOfText: 2,			    // number of lines of text to display for each image
--	resizable: false,		    // true = shows a resizable triangle at bottom right and right and bottom edges are hot targets for resizing
--	draggable: false,		    // true = show a handle bar at top which allows dragging
--	escapeKeyCloses: false,		    // true = escape key closes slideshow
--	arrowKeysNavigate: false,	    // true = left and right arrow keys will navigate previous and next slide
--	zoomMode: "zoom",		    // valid values: "zoom", "magnifier"
--	initMagZoom: 4,			    // initial zoom level 4 = 200%	
--	magnifierSize: {height: 200, width: 200}, // dimensions of magnifier window
--	divExternalMagnifier: undefined,    // div to hold imgCopy if magnifier for external viewing-	
--	magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
--	cbCreate: undefined,		    // callback when slideshow is created
--	cbClose: undefined,		    // callback when slideshow closes
--	wrapperBackground: "rgb(70,70,70)", // background of wrapper
--	wrapperBorder: "1px solid grey",    // rgb(128,128,128)
--	opaquePosition: "absolute",	    // fixed = cover entire screen; absolute = only cover container
--	opaqueBackground: "rgb(70,70,70,1)",	    // background of opque layer
--	opaqueEdge: 0,			    // distance around the opaque layer
--	imageBorder: "2px solid white",		    // border of the large slideshow image
--	filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
--	filmstripImageBorder: "2px solid white",    // border of the filmstrip images
--	filmstripImageHeight: 90,
--	waitAnimation: 0		    // wait animation to play when load
+#### Container
+Property | Default | Description
+--- | --- | ---
+resizable | false | Resize the container using a triangle handle (bottom right) or using the right and bottom container edges
+draggable | false | Drag the container using a handle div at the top
+slideshowHeight | undefined | Dimensions and position of Container
+slideshowWidth | undefined | 
+slideshowTop | undefined |
+slideshowLeft | undefined |
+slideshowCenter | false | true = center in window
+
+#### Show / Hide (Boolean: True shows and False hides the feature)
+Property | Default | Description
+--- | --- | ---
+showFilmstrip | true | The thumbnail filmstrip
+showFilmstripToggle | false | A triangle shaped button that toggles hiding and showing of the filmstrip
+showButtons | true | The button bar
+showExitButton | true | An exit button on the button bar
+showZoomButtons| true | The zoom in, out, and reset buttons
+showPlayPauseButton | true | The play / pause button
+showFullScreenButton | true | The fullscreen mode button
+showDownloadButton | false | The download button - requires a custom link to the server
+showPrintButton | false | Button to print the image (see image files section for custom print behavior)
+showOtherButton | false | A custom button (e.g. Purchase, Feedback) which requires a link (see files section) 
+showLocateButton | false | A custom button (e.g. Find, Locate, Go to a custom page) which requires a link (see files section)
+showFirstLastButtons | true | The first and last buttons on the button bar
+showText | true | The text under the image
+linesOfText | 2 | Number of lines of text to display for each image (valid range: 0 - 2)
+
+#### Keyboard Shortcuts (Boolean: True enables and False disables)
+Property | Default | Description
+--- | --- | ---
+escapeKeyCloses | false | Escape key closes slideshow
+arrowKeysNavigate | false | Left and right arrow keys will navigate previous and next slide
+
+#### Zoom Options
+Property | Default | Description
+--- | --- | ---
+- zoomMode | "zoom" | valid values: "zoom", "magnifier"
+|| zoom = Zoom In Place, magnifier = In Place Magnifier OR External Magnifier (if divExternalMagnifier is defined)
+divExternalMagnifier | undefined | an optional div to hold a zoomed copy of the image (zoom can be changed by clicking the image, or mouse scroll)
+initMagZoom | 4 | initial magnifier zoom level (4 = 400%) if using magnifier mode
+magnifierSize | {height: 200, width: 200} | Dimensions of the magnifier window to display when using any zoom mode
+magnifierStyles: | {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined} | styles for the external magnifier div (any style can be used)
+
+slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
+- slideshowWrap: false,		      // go back to the beginning when reached the end of the images
+- ssTransitionSeconds: 1,		    // seconds for move slide transition
+- ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
+- ssPaddingTop: 5,		          // minimum padding between image and top of container
+- container: undefined,		      // if set, will use to host slide show. if not set, will use document.body
+- resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
+- playOnEnter: false,		        // true = will start slideshow when loads
+- cbCreate: undefined,		    // callback when slideshow is created
+- cbClose: undefined,		    // callback when slideshow closes
+- wrapperBackground: "rgb(70,70,70)", // background of wrapper
+- wrapperBorder: "1px solid grey",    // rgb(128,128,128)
+- opaquePosition: "absolute",	    // fixed = cover entire screen; absolute = only cover container
+- opaqueBackground: "rgb(70,70,70,1)",	    // background of opque layer
+- opaqueEdge: 0,			    // distance around the opaque layer
+- imageBorder: "2px solid white",		    // border of the large slideshow image
+- filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
+- filmstripImageBorder: "2px solid white",    // border of the filmstrip images
+- filmstripImageHeight: 90,
+- waitAnimation: 0		    // wait animation to play when load
 
 <img src="/img/gradient-generator-screenshot.jpg" />
 <img src="/img/colorpicker-screenshot.jpg" />
