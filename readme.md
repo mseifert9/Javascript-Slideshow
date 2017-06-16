@@ -50,12 +50,29 @@ arrowKeysNavigate | false | Left and right arrow keys will navigate previous and
 #### Zoom Options
 Property | Default | Description
 --- | --- | ---
-zoomMode | "zoom" | valid values: "zoom", "magnifier"
-|| zoom = Zoom In Place, magnifier = In Place Magnifier OR External Magnifier (if divExternalMagnifier is defined)
+zoomMode | "zoom" | valid values: **"zoom"** = Zoom In Place, **"magnifier"** = In Place Magnifier OR External Magnifier (if divExternalMagnifier is defined)
 divExternalMagnifier | undefined | an optional div to hold a zoomed copy of the image (zoom can be changed by clicking the image, or mouse scroll)
 initMagZoom | 4 | initial magnifier zoom level (4 = 400%) if using magnifier mode
 magnifierSize | {height: 200, width: 200} | Dimensions of the magnifier window to display when using any zoom mode
 magnifierStyles: | {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined} | styles for the external magnifier div (any style can be used)
+
+#### Styling Options
+Property | Default | Description
+--- | --- | ---
+**Wrapper**|   |
+wrapperBackground | "rgb(70,70,70)" | Background Color of wrapper (note rgba can be used for transparency as well as gradients)
+wrapperBorder | "1px solid grey" | Border for the wrapper
+**Opaque Layer**|   |
+opaquePosition | "absolute" | Valid values: **"fixed"** = cover entire screen, **"absolute"** = only cover container
+opaqueBackground | "rgb(70,70,70,1)" | Background of the opque layer (only visible with "fixed" or "absolute" when slideshow doesn't fill the container
+opaqueEdge | 0 | An edge effect - The number of pixels on each side of the opaque layer to leave as a an empty border surrounding it. It will also create a 5px border around the layer if available.
+**Image**|   |
+imageBorder: "2px solid white" | Border of the large slideshow image
+**Filmstrip**|   |
+filmstripBackground | "rgb(170,170,170) | Background of filmstrip
+filmstripImageBorder | "2px solid white" | Border of the filmstrip images
+filmstripImageHeight | 90 | Height of the thumbnail images
+
 
 slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
 - slideshowWrap: false,		      // go back to the beginning when reached the end of the images
@@ -67,16 +84,9 @@ slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - de
 - playOnEnter: false,		        // true = will start slideshow when loads
 - cbCreate: undefined,		    // callback when slideshow is created
 - cbClose: undefined,		    // callback when slideshow closes
-- wrapperBackground: "rgb(70,70,70)", // background of wrapper
-- wrapperBorder: "1px solid grey",    // rgb(128,128,128)
-- opaquePosition: "absolute",	    // fixed = cover entire screen; absolute = only cover container
-- opaqueBackground: "rgb(70,70,70,1)",	    // background of opque layer
-- opaqueEdge: 0,			    // distance around the opaque layer
-- imageBorder: "2px solid white",		    // border of the large slideshow image
-- filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
-- filmstripImageBorder: "2px solid white",    // border of the filmstrip images
-- filmstripImageHeight: 90,
 - waitAnimation: 0		    // wait animation to play when load
+
+
 
 <img src="/img/gradient-generator-screenshot.jpg" />
 <img src="/img/colorpicker-screenshot.jpg" />
