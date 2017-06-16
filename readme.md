@@ -22,6 +22,7 @@ slideshowWidth | undefined |
 slideshowTop | undefined |
 slideshowLeft | undefined |
 slideshowCenter | false | true = center in window
+resizeWithWindow | false | If True, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
 
 #### Show / Hide (Boolean: True shows and False hides the feature)
 Property | Default | Description
@@ -68,25 +69,36 @@ opaqueBackground | "rgb(70,70,70,1)" | Background of the opque layer (only visib
 opaqueEdge | 0 | An edge effect - The number of pixels on each side of the opaque layer to leave as a an empty border surrounding it. It will also create a 5px border around the layer if available.
 **Image**|   |
 imageBorder: "2px solid white" | Border of the large slideshow image
+ssPaddingTop | 5 | Minimum padding between the image and the top of the container
 **Filmstrip**|   |
 filmstripBackground | "rgb(170,170,170) | Background of filmstrip
 filmstripImageBorder | "2px solid white" | Border of the filmstrip images
 filmstripImageHeight | 90 | Height of the thumbnail images
 
+#### Slideshow Options
+Property | Default | Description
+--- | --- | ---
+playOnEnter | false | Start the slideshow when the page loads
+slideshowInterval | 4000 | milliseconds between slides (400 milliseconds = 4 seconds)
+slideshowWrap | false | Allows wrapping from the last slide to the first or in reverse
 
-slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
-- slideshowWrap: false,		      // go back to the beginning when reached the end of the images
-- ssTransitionSeconds: 1,		    // seconds for move slide transition
-- ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
-- ssPaddingTop: 5,		          // minimum padding between image and top of container
-- container: undefined,		      // if set, will use to host slide show. if not set, will use document.body
-- resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
-- playOnEnter: false,		        // true = will start slideshow when loads
-- cbCreate: undefined,		    // callback when slideshow is created
-- cbClose: undefined,		    // callback when slideshow closes
-- waitAnimation: 0		    // wait animation to play when load
+#### Transition Options
+Property | Default | Description
+--- | --- | ---
+ssTransitionSeconds | 1 | Number of seconds for the slide animation
+ssTransitionEffect | 1 | The transition effect. A string or a zero based index into the array: **0 = "none"** = no transition, **1 ="fade"** = simple fade in and out, **2 = "h-move"** - horizontal movement of slides, ** 3 = "h-move-fade"** - move horizontally and fade, **5 ="size"** = Image Size transitions from old slide's size to new slide's size, **5 ="size-fade"** = Fades while transitioning size. (Best with a border around the slide)
+
+#### Loading Animation Options
+Property | Default | Description
+--- | --- | ---
+waitAnimation | 0 | (integer) Wait animation to play when loading the first image **-1** = None, **0 = DNA** - DNA like moving rods with a 'Pleas Wait' message, **1 = DNA 360°** - Rods move 360 degrees, **2 = Gif** - will use "loading.gif" - any gif animation file can be swapped with it. The stylesheet is set to 100px x 100px.
+   |   | Notes: The wait animation only plays when loading the first slide if there is a delay. The current animation can be manually triggered by pressing `ctrl-shift` and clicking on the upper right X close button. Doing the same `ctrl-shift-click` will stop and hide the animation. Pressing `ctrl-alt` and clicking on the upper right X close button will show and advance the animation to the next in the series of 3. The dna-like animation was based off of the CSS by Troshkin Pavel --> troshkin.pavel@yandex.ru --> original css at http://codepen.io/Maseone/pen/rGapf*/ . His animation was Inspired by Handel Eugene --> (https://dribbble.com/shots/1763719-DNA-GIF)
 
 
+#### Other Options (these cannot be set through the demo interface - except through entering the code directly)
+container | undefined | The container element to use for the slideshow. If not set, will use `document.body`
+cbCreate | undefined | A callback when the slideshow is created
+cbClose | undefined | A callback when slideshow closes
 
 <img src="/img/gradient-generator-screenshot.jpg" />
 <img src="/img/colorpicker-screenshot.jpg" />
