@@ -50,7 +50,7 @@ arrowKeysNavigate | false | Left and right arrow keys will navigate previous and
 #### Zoom Options
 Property | Default | Description
 --- | --- | ---
-- zoomMode | "zoom" | valid values: "zoom", "magnifier"
+zoomMode | "zoom" | valid values: "zoom", "magnifier"
 || zoom = Zoom In Place, magnifier = In Place Magnifier OR External Magnifier (if divExternalMagnifier is defined)
 divExternalMagnifier | undefined | an optional div to hold a zoomed copy of the image (zoom can be changed by clicking the image, or mouse scroll)
 initMagZoom | 4 | initial magnifier zoom level (4 = 400%) if using magnifier mode
