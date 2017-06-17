@@ -138,15 +138,15 @@ ss.init(files, currentSlide);
 <a href="url"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
 </div>
 <div><div>Wth External Magnifier</div>
-<a href="url"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="500"></a>
+<a href="url"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="400"></a>
 </div>
 <div style="display:inline-block;"><div>Floating option</div>
-<a href="url"><img src="/img-demo/screenshot-slideshow-floating.jpg" height="400"></a>
+<a href="url"><img src="/img-demo/screenshot-slideshow-floating.jpg" align="left" height="400"></a>
 </div>
 <div style="display:inline-block;"><div>Custom background, Opaque Layer = 80% opacity</div>
 <a href="url"><img src="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg" height="400"></a>
 </div>
-<div style="display:inline-block;width:350px"><div>Draggable and resizing triangle (barely visible green triangle bottom right) - also with custom wrapper background.</div>
+<div width:350px"><div>Draggable and resizing triangle (barely visible green triangle bottom right) - also with custom wrapper background.</div>
 <a href="url"><img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" height="400"></a>
 </div>
 
