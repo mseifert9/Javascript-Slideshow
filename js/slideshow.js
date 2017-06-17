@@ -422,6 +422,8 @@ $msRoot.Slideshow = (function(settings){
 		    this.settings.container.style.removeProperty("bottom");
 		    this.settings.container.style.removeProperty("right");
 		    this.settings.container.style.removeProperty("margin");
+		    this.settings.container.style.top = Math.max(0, parseInt(this.settings.container.style.top));
+		    this.settings.container.style.left = Math.max(0, parseInt(this.settings.container.style.left));
 		}.bind(this)
 	    });	    
 	}

@@ -8,26 +8,71 @@
 	    }
 	    body {
 		min-height: 100%;
+		font-size: 62.5%;
+		font-family: verdana,arial,sans-serif;
 	    }
-	    div.slideshow {
-		width: 600px;
+	    .tab-div {
+		width: 100%;
+		height: 100%;
+		background: rgb(200,200,200);
+	    }
+	    .tab-container {
+		margin-top: 20px;
+		margin-bottom: 5px;
+		width: 425px !important;
+		min-height: 400px;
 		height: 600px;
+		border: 1px solid black;
+		display: inline-block;
+		vertical-align: top;
+	    }
+	    .tab-container > ul {
+		height:25px;
+		background-color: #AAA;
+	    }
+	    .tab-container table {
+		font-size: 120%;
+	    }
+	    .tab-container tr {
+		line-height: 20px; 
+	    }
+	    #div-code-content > textarea {
+		height: 550px;
+	    }
+	    
+	    #demo {
+		position: relative;
+		width:795px;
+		height: 900px;
+		border: 1px solid black;
+		min-width:100%;
+		min-height:100%;
+		padding: 5px;
+		display: inline-block;
+		vertical-align: top;
+		background-color: rgb(240,240,240);
+	    }
+	    #settings-wrapper{
+		display: flex;
+		flex-flow: column wrap;		
 		position: absolute;
+		top: 30px;
 		left: 10px;
-		top: 10px;
+		width: 815px;
+		padding-bottom:20px;
 	    }
 	    #magnifier-output {
 		visibility: hidden;
-		width: 600px;
+		width: 400px;
 		height: 600px;
 		position: absolute;
 		border: 1px solid black;
-		left: 625px;
+		left: 620px;
 		top: 10px;
 	    }
 	    #start {
 		position: absolute;
-		top: 625px;
+		top: 0px;
 		left: 10px;
 	    }
 	    #testme{
@@ -35,52 +80,18 @@
 		top: 625px;
 		left: 160px;
 	    }
-	    #settings-wrapper{
-		display: flex;
-		flex-flow: column wrap;		
-		position: absolute;
-		top: 650px;
-		left: 10px;
-		width: 850px;
-		height: 1400px;
-		padding-bottom:20px;
-	    }
-	    #settings, #custom-options, #styling, #slide-flow,#code-output {
-		width: 400px;
-		flex: 0 0 auto;
-		border: 1px solid black;
-		margin-bottom: 10px
-	    }
-	    #settings {
-		order: 0;
-		background: rgb(200, 200, 210);
-	    }
-	    #custom-options{
-		order: 1;
-		background: rgb(200, 200, 220);
-		height: 900px;
-	    }
-	    #styling{
-		order: 3;
-		background: rgb(200, 200, 230);
-	    }
-	    #slide-flow{
-		order: 4;
-		background: rgb(200, 200, 240);
-	    }
-	    #code-output, #code-output textarea{
-		height: 200px;
-		order: 6;
-		background: rgb(200, 200, 250);
-	    }
 	    #copy-status {
 		position: absolute;
 		color: red;
 		bottom: 0;
 		right: 50px		
 	    }
-	    input[type=radio] {
+	    #btn-slideshow {
+		line-height:24px;
+	    }
+	    input[type=radio], input[type=checkbox] {
 		margin-left: 20px;
+		margin-right: 5px;
 	    }
 	    h3{
 		margin-left: 5px !important;
@@ -266,6 +277,7 @@
 		    case "fullscreen":
 			settings.container = undefined;	    // use document.body
 			settings.showFilmstripToggle = false;
+			settings.resizeWithWindow = true;
 			break;
 		    case "minimal":
 			settings.showFilmstrip = false;
@@ -444,32 +456,10 @@
 	     */
 	    var ss;
 	    function slideshow(settings) {
-		var path = $ms.sourceFiles.currentDir() + "/img-demo/";
-		var files = [
-		    {
-			filename: path + "images01.jpg",
-			thumb: path + "images01.jpg", // if same file, it is optional to define
-			downloadLink: undefined, // a url to start a download - will take place in the background in an iframe
-			locateLink: undefined, // a url to go to where the image would be in context
-			otherLink: undefined, // a custom url - purchase, feedback, etc... (would require your own image file to replace slideshow-feedback-sprite.png
-			logPrintFn: undefined, // a custom function to run after printing (e.g. log activity when a user prints an image)
-			line1Text: "Pigmy Owl",
-			line2Text: "Copyright 2017 - Michael Seifert"
-		    },
-		    {filename: path + "images02.jpg"},
-		    {filename: path + "images03.jpg"},
-		    {filename: path + "images04.jpg"},
-		    {filename: path + "images05.jpg"},
-		    {filename: path + "images06.jpg"},
-		    {filename: path + "images07.jpg"},
-		    {filename: path + "images08.jpg"},
-		    {filename: path + "images09.jpg"},
-		    {filename: path + "images10.jpg"},
-		    {filename: path + "images11.jpg"},
-		    {filename: path + "images12.jpg"},
-		    {filename: path + "images13.jpg"}
-		];
-
+		if (settings.container !== document.body){
+		    $ms.removeClass($ms.$("container"), "display-none");
+		}
+		var files = getFiles();
 		ss = new $msRoot.Slideshow(settings);
 		// the currentId
 		var currentSlide = 0;
@@ -482,6 +472,10 @@
 		container.style.height = "600px"
 		container.style.width = "600px"
 		container.style.margin = "0"
+		// in case added for center
+		container.style.removeProperty("right");
+		container.style.removeProperty("bottom");
+		$ms.addClass(container, "display-none");
 		ss = undefined;
 	    }
 	    function applySettings(runCodeSettings){
@@ -785,20 +779,10 @@
 		// or call testMe with the generated code
 		//**************************************
 		//**************************************
-		var path = $ms.STATIC_DEFAULT_ROOT + "/docs/grade-3/jpg/";
-		var files = [
-		    {
-			filename: path + "g3-bb-me-001.jpg",
-			thumb: path + "g3-bb-me-001.jpg", // if same file, it is optional to define
-			line1Text: "Noah's Ark",
-			line2Text: "Copyright 2017 - Michael Seifert"
-		    },
-		    {filename: path + "g3-bb-me-003.jpg"},
-		    {filename: path + "g3-bb-me-005.jpg"},
-		    {filename: path + "g3-bb-me-006.jpg"},
-		    {filename: path + "g3-bb-me-007.jpg"}
-		];
-		
+		if (settings.container !== document.body){
+		    $ms.removeClass($ms.$("container"), "display-none");
+		}
+		var files = getFiles();		
 		settings.cbClose = closeSlideshow;
 		ss = new $msRoot.Slideshow(settings);
 		var currentSlide = 0;
@@ -831,15 +815,115 @@
 				    0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
 		);
 		$ms.$(inputId).dispatchEvent(keyboardEvent);
-	    }	    
+	    }
+	    var tabDivsId = ["div-presets", "div-container", "div-show", "div-zoom", "div-styling", "div-slideshow", "div-code"];
+	    var tabDivs = [];
+	    function makeTabs(){
+		var divTabContainer = createTabs(["Presets", "Container", "Show", "Zoom", "Styling", "Slideshow", "Code"]);
+
+		$ms.$("demo").appendChild(divTabContainer);
+		for (var i = 0; i < tabDivsId.length; i++){
+		    // make the divs that go in tabs
+		    var div = document.createElement("div");
+		    div.id = tabDivsId[i];
+		    div.className = "tab-div display-none";
+		    div.appendChild($ms.$(tabDivsId[i] + "-content"))
+		    divTabContainer.appendChild(div);
+		    // content is hidden before appended - now can remove class after appending to hidden div
+		    $ms.removeClass($ms.$(tabDivsId[i] + "-content"), "display-none");
+		    tabDivs.push(div);
+		}
+		$ms.$("settings-wrapper").appendChild(divTabContainer)
+		showTab(0);
+	    }
+	    function createTabs(atabs){
+		var tabsDiv = document.createElement("div")
+		tabsDiv.id = "ss-demo-tab-container";
+		tabsDiv.className = "ms-tabs tab-container";
+		tabsDiv.style.position = "relative";
+		tabsDiv.backgroundColor = "rgb(230,230,230)";
+		var ul = document.createElement("ul");
+		ul.id = "ss-demo-tab-ul";
+		ul.className = "tab-primary";
+		tabsDiv.appendChild(ul);
+		for (var i = 0; i < atabs.length; i++){
+		    var li = document.createElement("li");
+		    li.id = "ss-demo-tab-" + i;
+		    li.innerHTML = atabs[i];
+		    !function (i){
+			li.addEventListener('click', function (e){
+			    showTab(i);
+			}, false)
+		    }(i);
+
+		    if (i == 0){
+		      li.className = 'tab-current';
+		    }
+		    ul.appendChild(li);
+		}
+		return tabsDiv;		
+	    }
+	    function showTab(tab){
+		var tabContainer = $ms.$("ss-demo-tab-container");
+		var ul;
+		for (var i = 0; i < tabContainer.childNodes.length; i++){
+		    if (tabContainer.childNodes[i].nodeName == "UL"){
+			ul = tabContainer.childNodes[i];
+			break;
+		    }
+		}
+
+		// highlight current tab
+		for (var i = 0; i < ul.childNodes.length; i++){
+		    if (i == tab){
+			$ms.addClass(ul.childNodes[i], 'tab-current');
+		    } else {
+			$ms.removeClass(ul.childNodes[i], 'tab-current');
+		    }
+		}	    
+		// hide all tabs
+		for (var i = 0; i < tabDivs.length; i++){
+		    $ms.addClass(tabDivs[i], "display-none");
+		}
+		// show the selected
+		$ms.removeClass(tabDivs[tab], "display-none");
+	    }
+	    
+	    function getFiles(){
+		var path = $ms.sourceFiles.currentDir() + "/img-demo/";
+		return [
+		    {
+			filename: path + "images01.jpg",
+			thumb: path + "images01.jpg", // if same file, it is optional to define
+			downloadLink: undefined, // a url to start a download - will take place in the background in an iframe
+			locateLink: undefined, // a url to go to where the image would be in context
+			otherLink: undefined, // a custom url - purchase, feedback, etc... (would require your own image file to replace slideshow-feedback-sprite.png
+			logPrintFn: undefined, // a custom function to run after printing (e.g. log activity when a user prints an image)
+			line1Text: "Pigmy Owl",
+			line2Text: "Copyright 2017 - Michael Seifert"
+		    },
+		    {filename: path + "images02.jpg"},
+		    {filename: path + "images03.jpg"},
+		    {filename: path + "images04.jpg"},
+		    {filename: path + "images05.jpg"},
+		    {filename: path + "images06.jpg"},
+		    {filename: path + "images07.jpg"},
+		    {filename: path + "images08.jpg"},
+		    {filename: path + "images09.jpg"},
+		    {filename: path + "images10.jpg"},
+		    {filename: path + "images11.jpg"},
+		    {filename: path + "images12.jpg"},
+		    {filename: path + "images13.jpg"}
+		];
+	    }
 	</script>
     </head>
-
+<div id="demo">
     <div id="container" class="slideshow"></div>
     <div id="magnifier-output" class="magnifier"></div>
     <div id="start"><input id="btn-slideshow" type="button" value="Start Slideshow" onclick="startSlideshow()"></div>    
     <div id="settings-wrapper">
-	<div id="settings">
+	<div id="div-presets-content" class="display-none">
 	    <h3>Preset Slideshow</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -861,10 +945,10 @@
 		<tr><td colspan="4"><input type="checkbox" id="ss-keep-custom" checked="checked"><label for="ss-keep-custom">Keep All Custom Options (except when necessary not to)</label></td></tr>
 	    </table>
 	</div>
-	<div id="custom-options">
-	    <h3>Custom Options</h3>
-	    <hr>
 
+	<div id="div-container-content" class="display-none">
+	    <h3>Container</h3>
+	    <hr>
 	    <table style="width: 100%">
 		<colgroup>
 		    <col style="width:22%;">
@@ -881,6 +965,8 @@
 		    <td colspan="2"><input type="checkbox" id="ss-use-body"><label for="ss-use-body">Use document.body</label></td>
 		    <td colspan="2"><input type="checkbox" id="ss-center"><label for="ss-center">Center</label></td>
 		</tr>
+		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window</label></td></tr>
+		<tr><td colspan="4"></tr>
 		<tr>
 		    <td>Height</td>
 		    <td><input id="ss-height" type="input" size=4 value="600"></td>
@@ -893,10 +979,17 @@
 		    <td>Left</td>
 		    <td><input id="ss-left" type="input" size=4 value=""></td>
 		</tr>
-		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window</label></td></tr>
+	    </table>
+	</div>
 
-		<tr><td colspan="4"><hr></td></tr>
-
+	<div id="div-show-content" class="display-none">
+	    <table style="width: 100%">
+		<colgroup>
+		    <col style="width:22%;">
+		    <col style="width:28%;">
+		    <col style="width:22%;">
+		    <col style="width:28%;">
+		</colgroup>
 		<tr><td colspan="4"><strong>Show:</strong></td></tr>	
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-filmstrip" checked="checked"><label for="ss-show-filmstrip">Filmstrip (thumbnails)</label></td>
 		    <td colspan="2"><input type="checkbox" id="ss-show-filmstrip-toggle" checked="checked"><label for="ss-show-filmstrip-toggle">Filmstrip Toggle Triangle)</label></td></tr>
@@ -915,16 +1008,19 @@
 		    <td colspan="2"><input type="checkbox" id="ss-show-locate"><label for="ss-show-locate">Locate Button (link)</label></td></tr>
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-exit" checked="checked"><label for="ss-show-exit">Exit Button</label></td>
 		    <td colspan="4"><input type="checkbox" id="ss-show-other"><label for="ss-show-other">Custom Button (link)</label></td></tr>
+	    </table>
+	</div>
 
-
-		<tr><td colspan="4"><hr></td></tr>
-		<tr><td colspan="4"><strong>Keyboard Shortcuts:</strong></td></tr>	
-		<tr>
-		    <td colspan="2"><input type="checkbox" id="ss-escape-key"><label for="ss-escape-key">Escape Key Exits</label></td>
-		    <td colspan="2"><input type="checkbox" id="ss-arrow-keys"><label for="ss-arrow-keys">Arrow Keys Navigate</label></td>
-		</tr>
-
-		<tr><td colspan="4"><hr></td></tr>
+	<div id="div-zoom-content" class="display-none">
+	    <h3>Zoom</h3>
+	    <hr>
+	    <table style="width: 100%">
+		<colgroup>
+		    <col style="width:22%;">
+		    <col style="width:28%;">
+		    <col style="width:22%;">
+		    <col style="width:28%;">
+		</colgroup>
 		<tr><td colspan="4"><strong>Zoom:</strong></td></tr>	
 		<tr><td colspan="4"><input id="ss-zoom-zoom" type="radio" name="zoom-mode" value="zoom-in-place" checked="checked"><label for="ss-zoom-zoom">Zoom In Place</label></tr>
 		<tr><td colspan="4"><input id="ss-zoom-magnifier-in-place" type="radio" name="zoom-mode" value="magnifier-in-place"><label for="ss-zoom-magnifier-in-place">In Place Magnifier</label></tr>
@@ -962,7 +1058,8 @@
 		</tr>
 	    </table>
 	</div>
-	<div id="styling">
+	
+	<div id="div-styling-content" class="display-none">
 	    <h3>Styling</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -1032,7 +1129,8 @@
 
 	    </table>
 	</div>
-	<div id="slide-flow">
+	
+	<div id="div-slideshow-content" class="display-none">
 	    <h3>Slideshow, Slide Transitions, Loading Animation</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -1077,9 +1175,17 @@
 		    <td colspan="2"><input id="ss-wait-dna-360" type="radio" name="wait" value="1"><label for="ss-wait-dna-360">DNA 360°</label>
 		    <td colspan="2"><input id="ss-wait-gif" type="radio" name="wait" value="2"><label for="ss-wait-gif">Animated Gif</label>
 		</tr>
+
+		<tr><td colspan="4"><hr></td></tr>
+		<tr><td colspan="4"><strong>Keyboard Shortcuts:</strong></td></tr>	
+		<tr>
+		    <td colspan="2"><input type="checkbox" id="ss-escape-key"><label for="ss-escape-key">Escape Key Exits</label></td>
+		    <td colspan="2"><input type="checkbox" id="ss-arrow-keys"><label for="ss-arrow-keys">Arrow Keys Navigate</label></td>
+		</tr>
 	    </table>
 	</div>
-	<div id="code-output">
+	
+	<div id="div-code-content" class="display-none">
 	    <h3 style="display:inline-block">Code</h3>
 	    <div style="display:inline-block; padding-left:20px"><input type="button" value="Generate" onclick="generateCode()"></div>
 	    <input type="checkbox" id="ss-minimal-code" style="display:inline-block; padding-left:5px"><label for="ss-minimal-code">Minimal</label>
@@ -1090,10 +1196,13 @@
 	    <div id="copy-status" class="display-none">Copied to Clipboard</div>
 	</div>
     </div>
+</div>
     <script>
 	$ms.setOnLoad($ms.$("container"), function () {	    
 	    var interval = setInterval(function() { 
 		if (typeof $msRoot["colorMethods"] !== "undefined"){
+		    clearInterval(interval);
+		    makeTabs();
 		    // replace all color inputs with colorpicker input
 		    createInput('ss-wrapper-background');
 		    createInput('ss-opaque-background');
@@ -1103,7 +1212,6 @@
 		    createInput('ss-image-border-color');
 		    createInput('ss-mag-border-color');
 		    applySettings();
-		    clearInterval(interval);
 		    return;
 		}		
 	    }, 10)
