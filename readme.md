@@ -131,11 +131,12 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div>Screenshot of the demo and Options Tester & Code Generator</div>
-<a href="url"><img src="/img-demo/screenshot-demo.jpg" align="left" height="200"></a>
-<img src="/img-demo/screenshot-demo.jpg" style='height:200px'/>
-Screenshot of Slideshow with all Default settings
-<img src="/img-demo/screenshot-slideshow-default.jpg" />
+<div style="inline-block">Screenshot of the demo and Options Tester & Code Generator
+<a href="url"><img src="/img-demo/screenshot-demo.jpg" align="left" height="500"></a>
+</div>
+<div style="inline-block">Screenshot of Slideshow with all Default settings
+<a href="url"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
+</div>
 Screenshot with External Magnifier
 <img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" />
 Screenshot with Floating option (notice the border of white with under layer visible at the bottom)
