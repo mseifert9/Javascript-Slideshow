@@ -148,7 +148,7 @@ ss.init(files, currentSlide);
 <div style="display:inline-block;"><div>Custom background, Opaque Layer = 80% opacity</div>
 <a href="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg"><img src="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg" height="400"></a>
 </div>
-<div><div>Draggable and resizing triangle</div>
+<div><div>Draggable Header and Resizing Triangle (barely visible)</div>
 <a href="/img-demo/screenshot-slideshow-draggable-custom-background.jpg"><img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" height="400"></a>
 </div>
 
