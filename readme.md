@@ -131,8 +131,8 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-Screenshot of the demo and Options Tester / Code Generator
-<img src="/img-demo/screenshot-demo.jpg" />
+<div>Screenshot of the demo and Options Tester & Code Generator</div>
+<img src="/img-demo/screenshot-demo.jpg" height: 200/>
 Screenshot of Slideshow with all Default settings
 <img src="/img-demo/screenshot-slideshow-default.jpg" />
 Screenshot with External Magnifier
