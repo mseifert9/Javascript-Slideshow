@@ -131,8 +131,8 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div><div>Options Tester & Code Generator</div>
-<a href="url"><img src="/img-demo/screenshot-demo.jpg" align="left" height="500"></a>
+<div><div>Demo, Slideshow Maker, and Settings Code Generator</div>
+<a href="/img-demo/screenshot-demo.jpg"><img src="/img-demo/screenshot-demo.jpg" align="left" height="500"></a>
 </div>
 <div><div>With All Default settings</div>
 <a href="url"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
@@ -150,7 +150,7 @@ ss.init(files, currentSlide);
 <a href="url"><img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" height="400"></a>
 </div>
 
-## Demo & Slideshow Maker
+## Demo, Slideshow Maker, and Settings Code Generator
 slideshow-demo.php gives an interface for choosing all options (except where noted below)
 
 ### The Files:
