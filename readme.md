@@ -145,8 +145,8 @@ ss.init(files, currentSlide);
 <div><div>Floating option</div>
 <a href="/img-demo/screenshot-slideshow-floating.jpg"><img src="/img-demo/screenshot-slideshow-floating.jpg" align="left" height="400"></a>
 </div>
-<div style="display:inline-block;"><div>Custom background, Opaque Layer = 80% opacity, Draggable Header</div>
-<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg.jpg" height="400"></a>
+<div style="display:inline-block;"><div>Custom background, 80% opacity, Draggable, Resizable</div>
+<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="400"></a>
 </div>
 
 ### The Files:
