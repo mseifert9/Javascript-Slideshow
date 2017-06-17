@@ -132,17 +132,17 @@ ss.init(files, currentSlide);
 ````
 
 Screenshot of the demo and Options Tester / Code Generator
-<img src="/img/screenshot-demo.jpg" />
+<img src="/img-demo/screenshot-demo.jpg" />
 Screenshot of Slideshow with all Default settings
-<img src="/img/screenshot-slideshow-default.jpg" />
+<img src="/img-demo/screenshot-slideshow-default.jpg" />
 Screenshot with External Magnifier
-<img src="/img/screenshot-slideshow-external-magnifier.jpg" />
+<img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" />
 Screenshot with Floating option (notice the border of white with under layer visible at the bottom)
-<img src="/img/screenshot-slideshow-floating.jpg" />
+<img src="/img-demo/screenshot-slideshow-floating.jpg" />
 Screenshot with custom background and opacity set at 80% for the Opaque Layer
-<img src="/img/screenshot-slideshow-opaque-layer-80-percent.jpg" />
+<img src="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg" />
 Screenshot with the draggable header and resizing triangle (green bottom right) - also with custom wrapper background.
-<img src="/img/screenshot-slideshow-draggable-custom-background.jpg" />
+<img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" />
 
 ## Demo & Slideshow Maker
 slideshow-demo.php gives an interface for choosing all options (except where noted below)
