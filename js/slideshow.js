@@ -20,7 +20,6 @@ $msRoot.Slideshow = (function(settings){
     var SLIDESHOW_HEIGHT;
     var ssTransitionEffects = ["none", "fade", "h-move", "h-move-fade", "size", "size-fade"];
 
-
     var defaultSettings = {
 	slideshowHeight: undefined,	    // needed for document.body - otherwise resizes existing container
 	slideshowWidth: undefined,
@@ -30,7 +29,7 @@ $msRoot.Slideshow = (function(settings){
 	slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
 	slideshowWrap: false,		    // go back to the beginning when reached the end of the images
 	ssTransitionSeconds: 1,		    // seconds for move slide transition
-	ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
+	ssTransitionEffect: 1,		    // string or index into ["none", "fade", "h-move", "h-move-fade", "size", "size-fade"]
 	ssPaddingTop: 5,		    // minimum padding between image and top of container
 	container: undefined,		    // if set, will use to host slide show. if not set, will use document.body
 	resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
@@ -40,12 +39,12 @@ $msRoot.Slideshow = (function(settings){
 	showButtons: true,		    // false = hide button bar
 	showExitButton: true,		    // show an exit button on the button bar
 	showZoomButtons: true,		    // false = hide the zoom in out reset buttons
-	showPlayPauseButton: true,		    // false = hide play / pause button, true = show play / pause button
+	showPlayPauseButton: true,	    // false = hide play / pause button, true = show play / pause button
 	showFullScreenButton: true,	    // show fullscreen button
 	showDownloadButton: false,	    // requires a link
-	showPrintButton: false,		    // requires a link
+	showPrintButton: false,		    // requires a link only if calling custom function after print
 	showOtherButton: false,		    // requires a link - custom use: e.g. Purchase, Feedback, ...
-	showLocateButton: false,	    // requires a link
+	showLocateButton: false,	    // requires a link - for find or goto page
 	showFirstLastButtons: true,	    // false = hide first and last buttons
 	showText: true,			    // false = hide text
 	linesOfText: 2,			    // number of lines of text to display for each image
@@ -57,7 +56,6 @@ $msRoot.Slideshow = (function(settings){
 	initMagZoom: 4,			    // initial zoom level 4 = 200%	
 	magnifierSize: {height: 200, width: 200}, // dimensions of magnifier window
 	divExternalMagnifier: undefined,    // div to hold imgCopy if magnifier for external viewing
-	//magnifierStyles: {top: "0", left: "500px", width: "600px", height: "600px", border: "1px solid black"},
 	magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
 	cbCreate: undefined,		    // callback when slideshow is created
 	cbClose: undefined,		    // callback when slideshow closes
@@ -80,7 +78,20 @@ $msRoot.Slideshow = (function(settings){
     $ms.sourceFiles.load();
     
     Slideshow.getDefaultSettings = function(){
-	return defaultSettings;
+	// serve a deep clone of the defaults so it cannot change
+	var copy = clone(defaultSettings);
+	return copy;
+	
+	function clone(obj) {
+	    if(obj == null || typeof(obj) !== 'object'){
+		return obj;
+	    }
+	    var objClone = Object.assign({}, obj);
+	    for (var key in objClone){
+		objClone[key] = clone(objClone[key]);
+	    }
+	    return objClone;
+	}
     }
     
     if (CSSRule.KEYFRAMES_RULE) {
@@ -147,7 +158,7 @@ $msRoot.Slideshow = (function(settings){
 	this.$resizable;
 	this.filmstripImageBorderWidth = 0;
 	
-	this.settings = $ms.cloneSettings(defaultSettings, settings);
+	this.settings = $ms.cloneSettings(Slideshow.getDefaultSettings(), settings);
 	// conversion to integer in case pass text
 	this.settings.filmstripImageHeight = parseInt(this.settings.filmstripImageHeight)
 
@@ -2963,7 +2974,7 @@ $msRoot.Slideshow = (function(settings){
 		this.settings.waitAnimation = waitAnimation;
 		divWait = document.createElement("div");
 		divWait.id = this.id + "wait-gif";
-		divWait.className = "ss-wait ss-loading ss-loading-circle";
+		divWait.className = "ss-wait ss-loading";
 		this.divMiddle.appendChild(divWait);
 	    }
 	    return;
@@ -2971,7 +2982,7 @@ $msRoot.Slideshow = (function(settings){
 	    // remove loading gif
 	    $ms.$(this.id + "wait-gif").parentNode.removeChild($ms.$(this.id + "wait-gif"));
 	}
-	
+
 	var divLine, divDotted, spanCircle, spanDot, divWait;
 	var colors = [];
 	colors.push({});
@@ -3258,7 +3269,7 @@ $msRoot.Slideshow.Magnifier = (function(settings){
 	if (this.settings.divMagnifier){
 	    // only allow zoom range from 1 - 4
 	    // scroll zoom in .1 increments
-	    this.magZoom += direction * .2;
+	    this.magZoom = +this.magZoom + direction * .2;
 	    this.magZoom = Math.min(10, Math.max(1.0, this.magZoom));
 	    
 	    this.imgCopy.height = this.settings.img.height * this.magZoom;

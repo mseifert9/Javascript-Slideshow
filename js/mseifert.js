@@ -2759,8 +2759,11 @@ $ms = $msRoot.common = function () {
 	    } else {
 		settings.startColor = input.style.background;
 	    }
+	    // open tool below and offset half way to the right of the input
+	    var rect = $ms.getOffset(input);
+	    settings.startPos = {top: rect.top + rect.height, left: rect.left + 20};
 	    /*
-	     * Create the colorpicker or gradient
+	     * Create the colorpicker or gradient generator
 	     */
 	    if (openGradient){
 		new $msRoot.Gradient(settings);

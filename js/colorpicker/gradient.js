@@ -970,7 +970,7 @@ $msRoot.Gradient = (function (settings) {
 	button.innerHTML = "Ok"
 	button.className = "ms-gradient-button ms-cp-button";
 	button.style.display = "block";
-	button.style.width = "117px";
+	button.style.width = "120px";
 	button.addEventListener("click", function(e){this.save()}.bind(this));
 	buttonDivInner.appendChild(button);
 	
@@ -978,14 +978,14 @@ $msRoot.Gradient = (function (settings) {
 	button.innerHTML = "Cancel"
 	button.className = "ms-gradient-button ms-cp-button";
 	button.style.display = "block";
-	button.style.width = "117px";
+	button.style.width = "120px";
 	button.addEventListener("click", function(e){this.cancel()}.bind(this));
 	buttonDivInner.appendChild(button);
 
 	// new / undo wrapper
 	var undoNewDiv = document.createElement("div");
 	undoNewDiv.style.display = "inline-block";
-	undoNewDiv.style.width = "117px";
+	undoNewDiv.style.width = "120px";
 	buttonDivInner.appendChild(undoNewDiv);	
 	
 	// new
@@ -1020,7 +1020,7 @@ $msRoot.Gradient = (function (settings) {
 	button.innerHTML = "Remove Gradient"
 	button.className = "ms-gradient-button ms-cp-button";
 	button.title = "Click to remove the current gradient and revert to a single color";
-	button.style.width = "117px";
+	button.style.width = "120px";
 	button.addEventListener('click', function(e){this.remove(e)}.bind(this));
 	buttonDivInner.appendChild(button);
 

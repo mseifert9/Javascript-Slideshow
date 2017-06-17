@@ -226,7 +226,7 @@ $staticSiteRoot = $_GET['static-site-root'];
     font-family: verdana,arial,sans-serif;
     background-color: rgb(230,230,230);
     border: 4px solid rgb(200,200,200);
-    width: 555px;
+    width: 570px;
     padding:0;
     position: absolute;
     line-height: 18px;

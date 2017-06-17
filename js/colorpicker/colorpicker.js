@@ -23,7 +23,7 @@ $msRoot.ColorPicker = (function (settings) {
 	imgPath: $ms.STATIC_JS_COMMON + "/colorpicker/img",
 	startMode: 'h',
 	startColor: '',
-	startPos: undefined,
+	startPos: undefined,	// {top: , left: }
 	target: undefined,	// an array of elements to update when values change
 	fontSize: 75,		// percent
 	zIndex: 1000,
@@ -38,6 +38,7 @@ $msRoot.ColorPicker = (function (settings) {
 	gradient: undefined,
 	fromGradient: false,
 	minimal: false
+	//source: undefined	// if source is set, the colorpicker will be placed below and 20px to the right of it.
     };
     
     var dependants = [
@@ -120,16 +121,15 @@ $msRoot.ColorPicker = (function (settings) {
 	    // gradient is open - will set position with show
 	    this.pinToGradient();
 	} else if (this.settings.startPos){
-	    this.settings.startPos.top = this.settings.startPos.top + "px";
-	    this.settings.startPos.left = this.settings.startPos.left + "px";
+	    this.settings.startPos.top = parseFloat(this.settings.startPos.top) + "px";
+	    this.settings.startPos.left = parseFloat(this.settings.startPos.left) + "px";
 	} else if (this.settings.source){
 	    // source - the input or button which initiated the call to colorpicker
 	    // open the colorpicker just below and 20px to the right of the the source's left
 	    var rect = $ms.getOffset(this.settings.source);
-	    var scroll = $ms.getScroll();
 	    this.settings.startPos = {};
-	    this.settings.startPos.top = rect["top"] + rect["height"] + scroll.y + "px";
-	    this.settings.startPos.left = rect["left"] + (20 + instance.length) + scroll.x + "px";
+	    this.settings.startPos.top = rect["top"] + rect["height"] + "px";
+	    this.settings.startPos.left = rect["left"] + (20 + instance.length) + "px";
 	} else {
 	    this.settings.startPos = {top: 100 + (20 * instance.length) + "px", left: 100 + (20 * instance.length) + "px"};
 	}
@@ -137,8 +137,8 @@ $msRoot.ColorPicker = (function (settings) {
 	var wSize = $ms.windowSize();
 	var containerWidth = parseInt($ms.getPropertyValue(this.container, "width"));
 	var containerHeight = parseInt($ms.getPropertyValue(this.container, "height"));
-	this.container.style.top = Math.max(0, Math.min(wSize.y - containerHeight, parseInt(this.settings.startPos.top))) + "px";
-	this.container.style.left = Math.max(0, Math.min(wSize.x - containerWidth, parseInt(this.settings.startPos.left))) + "px";
+	this.container.style.top = Math.max(0, parseInt(this.settings.startPos.top)) + "px";
+	this.container.style.left = Math.max(0, parseInt(this.settings.startPos.left)) + "px";
 	
 	// attach radio & check boxes
 	this.hueRadio = $ms.$(this.id + 'hue-radio');

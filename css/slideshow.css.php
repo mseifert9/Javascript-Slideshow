@@ -668,18 +668,13 @@ a.ss-next-large:before {
 }
 
 .ss-loading{
-    height: 110px;
-    width: 110px;
+    height: 100px;
+    width: 100px;
     left: 50%;
     top: 50%;
     margin-top: -50px;
     margin-left: -50px;
     position: absolute;
-}
-.ss-loading-icosahedron{
-    background:url(<?php echo $staticImgCommon ?>/loading-icosahedron2.gif) center center no-repeat;
-}
-.ss-loading-circle{
-    background:url(<?php echo $staticImgCommon ?>/loading-circle.gif) center center no-repeat;
+    background:url(<?php echo $staticImgCommon ?>/loading.gif) center center no-repeat;
 }
 

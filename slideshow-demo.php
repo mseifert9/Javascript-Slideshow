@@ -37,38 +37,34 @@
 	    }
 	    #settings-wrapper{
 		display: flex;
-		flex-flow: column wrap;
-		justify-content: space-around;
+		flex-flow: column wrap;		
 		position: absolute;
 		top: 650px;
 		left: 10px;
 		width: 850px;
-		height: 1050px;
+		height: 1400px;
 		padding-bottom:20px;
 	    }
-	    #settings {
+	    #settings, #custom-options, #styling, #slide-flow,#code-output {
 		width: 400px;
-		border: 1px solid black;
 		flex: 0 0 auto;
-		height: 250px;
+		border: 1px solid black;
+		margin-bottom: 10px
+	    }
+	    #settings {
 		order: 0;
 		background: rgb(200, 200, 210);
-	    }
-	    #custom-options, #styling, #slide-flow,#code-output {
-		width: 400px;
-		flex: 0 0 auto;
-		border: 1px solid black;
 	    }
 	    #custom-options{
 		order: 1;
 		background: rgb(200, 200, 220);
+		height: 900px;
 	    }
 	    #styling{
 		order: 3;
 		background: rgb(200, 200, 230);
 	    }
 	    #slide-flow{
-		height: 250px;
 		order: 4;
 		background: rgb(200, 200, 240);
 	    }
@@ -165,19 +161,23 @@
 	<script src="<?php echo STATIC_JS_COMMON ?>/colorpicker/colorpicker.js"></script>
 	-->
 	<script>
-	    function getSettings(useCustom){
+	    function getSettings(custom, keepCustom){
 		// start with defaults
 		var defaultSettings = $msRoot.Slideshow.getDefaultSettings();
 		//  add presets
-		var preset = presetSettings(true);
+		var preset = presetSettings();
 		var settings = $ms.cloneSettings(defaultSettings, preset);
-		if (typeof useCustom == "object"){
-		    // passed settings
-		    var custom = useCustom;
-		} else {
+		if (typeof custom == "object"){
+		    // passed settings from runCode
+		} else if (custom || keepCustom) {
 		    // add custom settings from inputs
-		    var custom = customSettings(true);
+		    custom = customSettings(true);
 		    settings = $ms.cloneSettings(settings, custom);
+		}
+		if (keepCustom){
+		    // apply presets over custom
+		    var preset = presetSettings();
+		    settings = $ms.cloneSettings(settings, preset);
 		}
 		return settings;
 	    }
@@ -229,7 +229,11 @@
 			settings.magnifierStyles = {top: "10px", left: "625px", width: "600px", height: "600px", border: "1px solid black"};
 			break;
 		    case "default":
-			settings = $msRoot.Slideshow.getDefaultSettings();
+			if ($ms.$("ss-keep-custom").checked){
+			    settings = {};
+			} else {
+			    settings = $msRoot.Slideshow.getDefaultSettings();
+			}
 			break;
 		}
 		if ($ms.$("ss-preserve-colors").checked){
@@ -242,6 +246,8 @@
 		    settings.opaqueBackground = $ms.$("ss-opaque-background").value;
 		    settings.filmstripImageBorder = toNumeric($ms.$("ss-filmstrip-image-border-px").value) + "px solid " + $ms.$("ss-filmstrip-image-border-color").value;
 		    settings.imageBorder = toNumeric($ms.$("ss-image-border-px").value) + "px solid " + $ms.$("ss-image-border-color").value;
+		    settings.magnifierStyles = {};
+		    settings.magnifierStyles.border = toNumeric($ms.$("ss-mag-border-px").value) + "px solid " + $ms.$("ss-mag-border-color").value;
 		}
 		return settings;
 		/*
@@ -267,7 +273,7 @@
 		    showPlayPauseButton: true,	    // false = hide play / pause button, true = show play / pause button
 		    showFullScreenButton: true,	    // show fullscreen button
 		    showDownloadButton: false,	    // requires a link
-		    showPrintButton: false,	    // requires a link
+		    showPrintButton: false,	    // 
 		    showOtherButton: false,	    // requires a link - custom use: e.g. Purchase, Feedback, ...
 		    showLocateButton: false,	    // requires a link
 		    showFirstLastButtons: true,	    // false = hide first and last buttons
@@ -292,7 +298,8 @@
 		    imageBorder: "2px solid white",		// border of the large slideshow image
 		    filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
 		    filmstripImageBorder: "2px solid white",    // border of the filmstrip images
-		    filmstripImageHeight: 90
+		    filmstripImageHeight: 90,
+		    waitAnimation: 0		    // wait animation to play when load
 		};
 		 */
 	    }
@@ -340,43 +347,39 @@
 			break;
 		    case "magnifier-in-place":
 			settings.zoomMode = "magnifier";
-			settings.magnifierSize = magSize();
 			break;
 		    case "magnifier-external":
 			settings.zoomMode = "magnifier";
-			settings.magnifierSize = magSize();
-			settings.divExternalMagnifier = $ms.$("magnifier-output");
-			var top = emptyStringToUndefined($ms.$("ss-ext-mag-top").value);
-			if (typeof top !== "undefined"){
-			    top += "px";
-			}
-			var left = emptyStringToUndefined($ms.$("ss-ext-mag-left").value);
-			if (typeof left !== "undefined"){
-			    left += "px";
-			}
-			var width = emptyStringToUndefined($ms.$("ss-ext-mag-width").value);
-			if (typeof width !== "undefined"){
-			    width += "px";
-			}
-			var height = emptyStringToUndefined($ms.$("ss-ext-mag-height").value);
-			if (typeof height !== "undefined"){
-			    height += "px";
-			}
-			var border = emptyStringToUndefined($ms.$("ss-mag-border-px").value);
-			if (border == "0"){
-			    border = undefined;
-			}
-			if (typeof border !== "undefined"){
-			    border += "px solid " + $ms.$("ss-mag-border-color").value;
-			}
-			settings.magnifierStyles = {
-			    top:  top,
-			    left: left,
-			    width: width,
-			    height: height,
-			    border: border
-			}
 			break;
+		}
+		settings.magnifierSize = magSize();
+		settings.divExternalMagnifier = $ms.$("magnifier-output");
+		var top = emptyStringToUndefined($ms.$("ss-ext-mag-top").value);
+		if (typeof top !== "undefined"){
+		    top += "px";
+		}
+		var left = emptyStringToUndefined($ms.$("ss-ext-mag-left").value);
+		if (typeof left !== "undefined"){
+		    left += "px";
+		}
+		var width = emptyStringToUndefined($ms.$("ss-ext-mag-width").value);
+		if (typeof width !== "undefined"){
+		    width += "px";
+		}
+		var height = emptyStringToUndefined($ms.$("ss-ext-mag-height").value);
+		if (typeof height !== "undefined"){
+		    height += "px";
+		}
+		var border = emptyStringToUndefined($ms.$("ss-mag-border-px").value);
+		if (typeof border !== "undefined"){
+		    border += "px solid " + $ms.$("ss-mag-border-color").value;
+		}
+		settings.magnifierStyles = {
+		    top:  top,
+		    left: left,
+		    width: width,
+		    height: height,
+		    border: border
 		}
 		function magSize() {
 		    return {
@@ -384,6 +387,7 @@
 			width: $ms.$("ss-int-mag-width").value
 		    }
 		}
+		settings.initMagZoom = $ms.$("ss-init-mag-zoom").value;
 
 		// styling
 		// Wrapper
@@ -406,6 +410,7 @@
 		settings.slideshowWrap = $ms.$("ss-wrap").checked;
 		settings.ssTransitionEffect = toNumeric(document.querySelector('input[name="transition"]:checked').value);
 		settings.ssTransitionSeconds = toNumeric($ms.$("ss-transition-seconds").value);
+		settings.waitAnimation = toNumeric(document.querySelector('input[name="wait"]:checked').value);
 		
 		// keep color of background in sync with the text
 		updateColor('ss-wrapper-background');
@@ -414,6 +419,7 @@
 		updateColor('ss-wrapper-border-color');
 		updateColor('ss-filmstrip-image-border-color');
 		updateColor('ss-image-border-color');
+		updateColor('ss-mag-border-color');
 		
 		return settings;
 	    }
@@ -473,8 +479,11 @@
 		container.style.margin = "0"
 		ss = undefined;
 	    }
-	    function applySettings(useCustom){
-		var settings = getSettings(useCustom);
+	    function applySettings(runCodeSettings){
+		// keepCustom = true will apply presets over custom (over default)
+		// keepCustom = false will only apply presets over default
+		var keepCustom = $ms.$("ss-keep-custom").checked;
+		var settings = getSettings(runCodeSettings, keepCustom);
 		// apply settings to elements
 		if (settings.container == document.body){
 		    $ms.$("ss-use-body").checked = true;
@@ -511,6 +520,7 @@
 		// Zoom
 		$ms.$("ss-int-mag-height").value = undefinedToEmptyString(settings.magnifierSize.height);
 		$ms.$("ss-int-mag-width").value = undefinedToEmptyString(settings.magnifierSize.width);
+		$ms.$("ss-init-mag-zoom").value = settings.initMagZoom;
 		// zoom-mode radio
 		if (settings.zoomMode == "zoom"){
 		    $ms.$("ss-zoom-zoom").checked = true;
@@ -578,6 +588,21 @@
 			break;
 		}		
 		$ms.$("ss-transition-seconds").value = settings.ssTransitionSeconds;
+		// wait animation radio
+		switch (settings.waitAnimation){
+		    case -1:
+			$ms.$("ss-wait-none").checked = true;
+			break;
+		    case 0:
+			$ms.$("ss-wait-dna").checked = true
+			break;
+		    case 1:
+			$ms.$("ss-wait-dna-360").checked = true
+			break;
+		    case 2:
+			$ms.$("ss-wait-gif").checked = true
+			break;
+		}	
 		
 		generateCode();
 	    }
@@ -817,17 +842,18 @@
 		    <col style="width:50%;">
 		    <col style="width:50%;">
 		</colgroup>
-		<tr><td><input id="ss-default" type="radio" name="preset" value="default" checked="checked" onclick="applySettings(false)"><label for="ss-default">Default</label></td>
-		    <td><input id="ss-floating" type="radio" name="preset" value="floating" onclick="applySettings(false)"><label for="ss-floating">Floating</label></td></tr>
-		<tr><td><input id="ss-movable" type="radio" name="preset" value="movable" onclick="applySettings(false)"><label for="ss-movable">Movable</label></td>
-		    <td><input id="ss-body" type="radio" name="preset" value="body" onclick="applySettings(false)"><label for="ss-body">Document Body</label></td></tr>
-		<tr><td><input id="ss-fullscreen" type="radio" name="preset" value="fullscreen" onclick="applySettings(false)"><label for="ss-fullscreen">Full Screen</label></td>
-		    <td><input id="ss-minimal" type="radio" name="preset" value="minimal" onclick="applySettings(false)"><label for="ss-minimal">Minimal</label></td></tr>
-		<tr><td><input id="ss-magnifier" type="radio" name="preset" value="magnifier" onclick="applySettings(false)"><label for="ss-magnifier">In Place Magnifier</label></td>
-		    <td><input id="ss-external" type="radio" name="preset" value="external" onclick="applySettings(false)"><label for="ss-external">External Magnifier</label></td></tr>
+		<tr><td><input id="ss-default" type="radio" name="preset" value="default" checked="checked" onclick="applySettings()"><label for="ss-default">Default</label></td>
+		    <td><input id="ss-floating" type="radio" name="preset" value="floating" onclick="applySettings()"><label for="ss-floating">Floating</label></td></tr>
+		<tr><td><input id="ss-movable" type="radio" name="preset" value="movable" onclick="applySettings()"><label for="ss-movable">Movable</label></td>
+		    <td><input id="ss-body" type="radio" name="preset" value="body" onclick="applySettings()"><label for="ss-body">Document Body</label></td></tr>
+		<tr><td><input id="ss-fullscreen" type="radio" name="preset" value="fullscreen" onclick="applySettings()"><label for="ss-fullscreen">Full Screen</label></td>
+		    <td><input id="ss-minimal" type="radio" name="preset" value="minimal" onclick="applySettings()"><label for="ss-minimal">Minimal</label></td></tr>
+		<tr><td><input id="ss-magnifier" type="radio" name="preset" value="magnifier" onclick="applySettings()"><label for="ss-magnifier">In Place Magnifier</label></td>
+		    <td><input id="ss-external" type="radio" name="preset" value="external" onclick="applySettings()"><label for="ss-external">External Magnifier</label></td></tr>
 		
 		<tr></tr>
-		<tr><td colspan="2"><input type="checkbox" id="ss-preserve-colors" checked="checked"><label for="ss-preserve-colors">Preserve Colors</label></td></tr>
+		<tr><td colspan="4"><input type="checkbox" id="ss-preserve-colors" checked="checked"><label for="ss-preserve-colors">Preserve Colors</label></td></tr>
+		<tr><td colspan="4"><input type="checkbox" id="ss-keep-custom" checked="checked"><label for="ss-keep-custom">Keep All Custom Options (except when necessary not to)</label></td></tr>
 	    </table>
 	</div>
 	<div id="custom-options">
@@ -862,7 +888,7 @@
 		    <td>Left</td>
 		    <td><input id="ss-left" type="input" size=4 value=""></td>
 		</tr>
-		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window (with unchecked - width needed)</label></td></tr>
+		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window</label></td></tr>
 
 		<tr><td colspan="4"><hr></td></tr>
 
@@ -873,6 +899,7 @@
 		    <td># Lines</td>
 		    <td><input id="ss-number-lines" type="input" size=4 value="2"></td>
 		</tr>
+		<tr><td colspan="4"><strong>Buttons:</strong></td></tr>	
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-buttons" checked="checked"><label for="ss-show-buttons">Buttons Bar</label></td>
 		    <td colspan="2"><input type="checkbox" id="ss-show-first" checked="checked"><label for="ss-show-first">First & Last Buttons</label></td></tr>
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-zoom" checked="checked"><label for="ss-show-zoom">Zoom Buttons</label></td>
@@ -907,6 +934,11 @@
 		</tr>
 		<tr><td colspan="4"><strong>External Magnifier Box:</strong></td></tr>	
 		<tr>
+		    <td colspan="2">Initial Magnification Level</td>
+		    <td><input id="ss-init-mag-zoom" type="input" size=4 value="4"></td>
+		    <td>(e.g. 4 = 400%)</td>
+		</tr>
+		<tr>
 		    <td>Height</td>
 		    <td><input id="ss-ext-mag-height" type="input" size=4 value="600"></td>
 		    <td>Width</td>
@@ -921,7 +953,7 @@
 		<tr>
 		    <td>Border</td>
 		    <td><input id="ss-mag-border-px" type="input" size=2 value="1"> px</td>
-		    <td colspan="2"><input id="ss-mag-border-color" type="input" value="grey"></td>
+		    <td colspan="2"><input id="ss-mag-border-color" type="input" value=""></td>
 		</tr>
 	    </table>
 	</div>
@@ -943,7 +975,7 @@
 		<tr>
 		    <td>Border</td>
 		    <td><input id="ss-wrapper-border-px" type="input" size=2 value="1"> px</td>
-		    <td colspan="2"><input id="ss-wrapper-border-color" type="input" value="grey"></td>
+		    <td colspan="2"><input id="ss-wrapper-border-color" type="input" value=""></td>
 		</tr>
 
 		<tr><td colspan="4"><hr></td></tr>
@@ -996,7 +1028,7 @@
 	    </table>
 	</div>
 	<div id="slide-flow">
-	    <h3>Slideshow and Transitions</h3>
+	    <h3>Slideshow, Slide Transitions, Loading Animation</h3>
 	    <hr>
 	    <table style="width: 100%">
 		<colgroup>
@@ -1031,7 +1063,15 @@
 		    <td colspan="2"><input id="ss-transition-size" type="radio" name="transition" value="4"><label for="ss-transition-size">Size</label>
 		    <td colspan="2"><input id="ss-transition-size-fade" type="radio" name="transition" value="5"><label for="ss-transition-size-fade">Size & Fade</label>
 		</tr>
-
+		<tr><td colspan="4"><strong>Loading Animation:</strong></td></tr>
+		<tr>
+		    <td colspan="2"><input id="ss-wait-none" type="radio" name="wait" value="-1"><label for="ss-wait-none">None</label>
+		    <td colspan="2"><input id="ss-wait-dna" type="radio" name="wait" value="0" checked="checked"><label for="ss-wait-dna">DNA</label>
+		</tr>
+		<tr>
+		    <td colspan="2"><input id="ss-wait-dna-360" type="radio" name="wait" value="1"><label for="ss-wait-dna-360">DNA 360°</label>
+		    <td colspan="2"><input id="ss-wait-gif" type="radio" name="wait" value="2"><label for="ss-wait-gif">Animated Gif</label>
+		</tr>
 	    </table>
 	</div>
 	<div id="code-output">
@@ -1056,7 +1096,8 @@
 		    createInput('ss-wrapper-border-color');
 		    createInput('ss-filmstrip-image-border-color');
 		    createInput('ss-image-border-color');
-		    applySettings(false);
+		    createInput('ss-mag-border-color');
+		    applySettings();
 		    clearInterval(interval);
 		    return;
 		}		
