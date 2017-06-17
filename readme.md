@@ -131,20 +131,24 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div style="inline-block">Screenshot of the demo and Options Tester & Code Generator
+<div style="inline-block"><div>Screenshot of the demo and Options Tester & Code Generator</div>
 <a href="url"><img src="/img-demo/screenshot-demo.jpg" align="left" height="500"></a>
 </div>
-<div style="inline-block">Screenshot of Slideshow with all Default settings
+<div style="inline-block"><div>Screenshot of Slideshow with all Default settings</div>
 <a href="url"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
 </div>
-Screenshot with External Magnifier
-<img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" />
-Screenshot with Floating option (notice the border of white with under layer visible at the bottom)
-<img src="/img-demo/screenshot-slideshow-floating.jpg" />
-Screenshot with custom background and opacity set at 80% for the Opaque Layer
-<img src="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg" />
-Screenshot with the draggable header and resizing triangle (green bottom right) - also with custom wrapper background.
-<img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" />
+<div><div>Screenshot with External Magnifier</div>
+<a href="url"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="500"></a>
+</div>
+<div style="inline-block"><div>Screenshot with Floating option (notice the border of white with under layer visible at the bottom)</div>
+<img src="/img-demo/screenshot-slideshow-floating.jpg" height="500"></a>
+</div>
+<div style="inline-block"><div>Screenshot with custom background and opacity set at 80% for the Opaque Layer</div>
+<img src="/img-demo/screenshot-slideshow-opaque-layer-80-percent.jpg" height="500"></a>
+</div>
+<div style="inline-block"><div>Screenshot with the draggable header and resizing triangle (green bottom right) - also with custom wrapper background.</div>
+<img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" height="500"></a>
+</div>
 
 ## Demo & Slideshow Maker
 slideshow-demo.php gives an interface for choosing all options (except where noted below)
