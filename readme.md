@@ -132,7 +132,7 @@ ss.init(files, currentSlide);
 ````
 
 <div>Screenshot of the demo and Options Tester & Code Generator</div>
-<img src="/img-demo/screenshot-demo.jpg" height: 200/>
+<img src="/img-demo/screenshot-demo.jpg" style='height:200px'/>
 Screenshot of Slideshow with all Default settings
 <img src="/img-demo/screenshot-slideshow-default.jpg" />
 Screenshot with External Magnifier
