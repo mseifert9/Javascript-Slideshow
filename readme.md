@@ -100,18 +100,55 @@ container | undefined | The container element to use for the slideshow. If not s
 cbCreate | undefined | A callback when the slideshow is created
 cbClose | undefined | A callback when slideshow closes
 
-<img src="/img/gradient-generator-screenshot.jpg" />
-<img src="/img/colorpicker-screenshot.jpg" />
+### Images - Specifying the files to display
+````
+	var path = $ms.sourceFiles.currentDir() + "/img-demo/";		// the demo sets the path to the img-demo directory below the current
+	var files = [
+	    {
+		filename: path + "images01.jpg",
+		thumb: path + "images01.jpg", 	// optional to define if using the same file as the thumbnail
+		downloadLink: undefined, 		// a url to start a customized download - will take place in the background in an iframe
+		locateLink: undefined,			// a url to go to where the image would be in context
+		otherLink: undefined, 			// a custom url - e.g. purchase, feedback (would require your own image file to replace slideshow-feedback-sprite.png
+		logPrintFn: undefined, 			// a custom function to run after printing (e.g. log activity when a user prints an image)
+		line1Text: "Pigmy Owl",			// Description text to display below the image
+		line2Text: "Copyright 2017 - Michael Seifert"
+		},
+		{filename: path + "images02.jpg"},
+		{filename: path + "images03.jpg"}
+	];
+````
 
-## Demos
-**gradient-demo.php** is actually two demos in one and contains most of the commonly used features.
-In the following demos, a minimum of two elements are updated by the ColorPicker  and Gradient Generator: The "target" is the "true" destination element. Also included is an optional div (it can be an input or label) to receive a text version of the color or gradient.
-1. **Simple Click to Open Demo** creates one div as a "front end." This can be an input, label, or div (as in this demo). This div will contain both the color chosen and the css string of the chosen color (or gradient). The Demo also gives a "target" div which the color is set for. An option is given to add as many additional divs as desired to test performance.
-This fully functional demo of the ColorPicker and Gradient Generator is available at http://design.mseifert.com/index.php?topid=1&grade=Gradient&topid=1
-2. **Dynamic Color Input Demo** creates a custom input control with a clickable arrow to open the tool. The input is automatically linked to the ColorPicker and Gradient Generator in a two way fashion. If a color is typed into the input, it is reflected immediately in the input as well as in any open tool. Supported formats for typed in text include Hex, RGB, and CSS Color Names.
-**gradient-demo-simple.php** includes the minimal features to get going and includes only the Click to Open demo from above.
-## Basic Documentation
-MS ColorPicker and Gradient Generator run within all major browsers from IE9+. Tested in Firefox, Chrome, Opera, Safari for Windows, Internet Explorer.
+#### Calling the Slideshow
+The slideshow is called in two steps:
+````
+var files = [{file: http://mysite.com/img/file1.jpg]};	// The array of files to display as slides with options set
+var settings = {container: myDiv};	// all the settings above can be set or an empty object {} can be passed to use all defaults
+// initialize all the settings
+var ss = new $msRoot.Slideshow(settings);
+// run the slideshow
+var currentSlide = 0;		// set the first slide to be shown
+ss.init(files, currentSlide);
+````
+
+Screenshot of the demo and Options Tester / Code Generator
+<img src="/img/screenshot-demo.jpg" />
+Screenshot of Slideshow with all Default settings
+<img src="/img/screenshot-slideshow-default.jpg" />
+Screenshot with External Magnifier
+<img src="/img/screenshot-slideshow-external-magnifier.jpg" />
+Screenshot with Floating option (notice the border of white with under layer visible at the bottom)
+<img src="/img/screenshot-slideshow-floating.jpg" />
+Screenshot with custom background and opacity set at 80% for the Opaque Layer
+<img src="/img/screenshot-slideshow-opaque-layer-80-percent.jpg" />
+Screenshot with the draggable header and resizing triangle (green bottom right) - also with custom wrapper background.
+<img src="/img/screenshot-slideshow-draggable-custom-background.jpg" />
+
+
+screenshot-slideshow-draggable-custom-background
+## Demo & Slideshow Maker
+slideshow-demo.php gives an interface for choosing all options (except where noted below)
+
 
 ### Implementation
 The following code is from the simple demo.
