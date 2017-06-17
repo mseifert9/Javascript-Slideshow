@@ -99,6 +99,8 @@ waitAnimation | 0 | (integer) Wait animation to play when loading the first imag
 container | undefined | The container element to use for the slideshow. If not set, will use `document.body`
 cbCreate | undefined | A callback when the slideshow is created
 cbClose | undefined | A callback when slideshow closes
+divExternalMagnifier | undefined | Div to hold a copy of the magnified image
+
 
 ### Images - Specifying the files to display
 ````
@@ -150,10 +152,10 @@ ss.init(files, currentSlide);
 <a href="/img-demo/screenshot-slideshow-draggable-custom-background.jpg"><img src="/img-demo/screenshot-slideshow-draggable-custom-background.jpg" height="400"></a>
 </div>
 
-## Demo, Slideshow Maker, and Settings Code Generator
-slideshow-demo.php gives an interface for choosing all options (except where noted below)
-
 ### The Files:
+###### slideshow-demo.php
+ - Gives an interface for choosing all options (except where noted above in the Other Options section)
+ - Will also generate the settings code to pass to the slideshow object
 ###### slideshow.js
  - the main slideshow library
 ###### slideshow.css.php
