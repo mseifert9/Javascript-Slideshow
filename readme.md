@@ -144,8 +144,6 @@ Screenshot with custom background and opacity set at 80% for the Opaque Layer
 Screenshot with the draggable header and resizing triangle (green bottom right) - also with custom wrapper background.
 <img src="/img/screenshot-slideshow-draggable-custom-background.jpg" />
 
-
-screenshot-slideshow-draggable-custom-background
 ## Demo & Slideshow Maker
 slideshow-demo.php gives an interface for choosing all options (except where noted below)
 
@@ -213,8 +211,30 @@ fromGradient		// flags when opened from the Gradient Generator
 minimal		// does nothing – considered having a flag to remove the color library
 ```
 ### The Files:
-With the exception of gradient.js, all files originated from John Dyer's library. The Gradient Generator was written by me from the ground up except for the regex which parses the gradients. The parsing regex is from Dean Taylor from this StackOverflow post: 
-https://stackoverflow.com/questions/20215440/parse-css-gradient-rule-with-javascript-regex
+###### slideshow.js
+ - the main slideshow library
+###### slideshow.css.php
+ - the css for the slideshow
+###### resize.js
+ - defines the Resize class
+ -     support for resizing the slideshow
+ ###### dragdrop.js
+ - defines the DragDrop class
+ -     support for drag and drop of the slideshow
+###### draggable.js
+ - defines the Draggable class
+ -     makes elements draggable
+###### droppable.js
+ - defines the Droppable class
+ -     makes elements drop targets –able to receive draggable elements
+###### moddate.php
+ - optional file for version checking of dynamically loaded js files
+ -     For more information, see my GitHub library for [Javascript-Dynamic-Loading-and-Version-Control for documentation](https://github.com/mseifert9/Javascript-Dynamic-Loading-and-Version-Control)
+###### .htaccess
+ - optional file for version checking of dynamically loaded js files
+ -     Contains a RewriteRule to filter out the timestamp in the filenames
+
+### For Colorpicker and Gradient Generator only files - Helpful for designing in the demo, but not needed for the Slideshow
 ###### colorPicker.js 
  - defines the ColorPicker class
  -     creates the user interface and controls the workflow for the ColorPicker
@@ -246,22 +266,7 @@ https://stackoverflow.com/questions/20215440/parse-css-gradient-rule-with-javasc
 ###### editable-combo.js
  - defines the EditableCombo class
  -     a custom editable combox element used by colorlibrary.js
-###### dragdrop.js
- - defines the DragDrop class
- -     support for drag and drop of elements
-###### draggable.js
- - defines the Draggable class
- -     makes elements draggable
-###### droppable.js
- - defines the Droppable class
- -     makes elements drop targets –able to receive draggable elements
-###### moddate.php
- - optional file for version checking of dynamically loaded js files
- -     For more information, see my GitHub library for [Javascript-Dynamic-Loading-and-Version-Control for documentation](https://github.com/mseifert9/Javascript-Dynamic-Loading-and-Version-Control)
-###### .htaccess
- - optional file for version checking of dynamically loaded js files
- -     Contains a RewriteRule to filter out the timestamp in the filenames
-
+ 
 ## The Namespace
 This project uses the com.mseifert javascript namespace. In addition to the namespace, two global variables are used as shortcuts:
 ``` 
