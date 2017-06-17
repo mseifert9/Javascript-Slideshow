@@ -161,6 +161,63 @@
 	<script src="<?php echo STATIC_JS_COMMON ?>/colorpicker/colorpicker.js"></script>
 	-->
 	<script>
+	    /* List of all settings and defaults
+	    var defaultSettings = {
+		slideshowHeight: undefined,	    // needed for document.body - otherwise resizes existing container
+		slideshowWidth: undefined,
+		slideshowTop: undefined,	    // positioning for existing container
+		slideshowLeft: undefined,
+		slideshowCenter: false,	    // true = center in window
+		slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
+		slideshowWrap: false,	    // go back to the beginning when reached the end of the images
+		ssTransitionSeconds: 1,	    // seconds for move slide transition
+		ssTransitionEffect: 1,	    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
+		ssPaddingTop: 5,		    // minimum padding between image and top of container
+		container: undefined,	    // if set, will use to host slide show. if not set, will use document.body
+		resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
+		playOnEnter: false,		    // true = will start slideshow when loads
+		showFilmstrip: true,	    // false = hide filmstrip
+		showFilmstripToggle: false,	    // true = auto show button that allows hide of filmstrip
+		showButtons: true,		    // false = hide button bar
+		showExitButton: true,	    // false = hide exit button on the button bar
+		showZoomButtons: true,	    // false = hide the zoom in out reset buttons
+		showPlayPauseButton: true,	    // false = hide play / pause button, true = show play / pause button
+		showFullScreenButton: true,	    // show fullscreen button
+		showDownloadButton: false,	    // requires a link
+		showPrintButton: false,	    // 
+		showOtherButton: false,	    // requires a link - custom use: e.g. Purchase, Feedback, ...
+		showLocateButton: false,	    // requires a link
+		showFirstLastButtons: true,	    // false = hide first and last buttons
+		showText: true,		    // false = hide text
+		linesOfText: 2,		    // number of lines of text to display for each image
+		resizable: false,		    // true = shows a resizable triangle at bottom right and right and bottom edges are hot targets for resizing
+		draggable: false,		    // true = show a handle bar at top which allows dragging
+		escapeKeyCloses: false,	    // true = escape key closes slideshow
+		arrowKeysNavigate: false,	    // true = left and right arrow keys will navigate previous and next slide
+		zoomMode: "zoom",		    // valid values: "zoom", "magnifier"
+		initMagZoom: 4,				// initial zoom level 4 = 200%	
+		magnifierSize: {height: 200, width: 200},	// dimensions of magnifier window
+		divExternalMagnifier: undefined,		// div to hold imgCopy if magnifier for external viewing
+		magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
+		cbCreate: undefined,			// callback when slideshow is created
+		cbClose: undefined,				// callback when slideshow closes
+		wrapperBackground: "rgb(70,70,70)",		// background of wrapper
+		wrapperBorder: "1px solid grey",		// rgb(128,128,128)
+		opaquePosition: "absolute",			// fixed = cover entire screen; absolute = only cover container
+		opaqueBackground: "rgb(70,70,70,1)",	// background of opque layer
+		opaqueEdge: 0,				// distance around the opaque layer
+		imageBorder: "2px solid white",		// border of the large slideshow image
+		filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
+		filmstripImageBorder: "2px solid white",    // border of the filmstrip images
+		filmstripImageHeight: 90,
+		waitAnimation: 0		    // wait animation to play when load
+	    };
+	    Settings which cannot be set with this interface
+	    container		// if set, will use to host slide show. if not set, will use document.body
+	    divExternalMagnifier	// div to hold imgCopy if using external magnifier
+	    cbCreate: undefined,	// callback when slideshow is created
+	    cbClose: undefined,	// callback when slideshow closes
+	     */
 	    function getSettings(custom, keepCustom){
 		// start with defaults
 		var defaultSettings = $msRoot.Slideshow.getDefaultSettings();
@@ -250,58 +307,6 @@
 		    settings.magnifierStyles.border = toNumeric($ms.$("ss-mag-border-px").value) + "px solid " + $ms.$("ss-mag-border-color").value;
 		}
 		return settings;
-		/*
-		var defaultSettings = {
-		    slideshowHeight: undefined,	    // needed for document.body - otherwise resizes existing container
-		    slideshowWidth: undefined,
-		    slideshowTop: undefined,	    // positioning for existing container
-		    slideshowLeft: undefined,
-		    slideshowCenter: false,	    // true = center in window
-		    slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
-		    slideshowWrap: false,	    // go back to the beginning when reached the end of the images
-		    ssTransitionSeconds: 1,	    // seconds for move slide transition
-		    ssTransitionEffect: 1,	    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
-		    ssPaddingTop: 5,		    // minimum padding between image and top of container
-		    container: undefined,	    // if set, will use to host slide show. if not set, will use document.body
-		    resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
-		    playOnEnter: false,		    // true = will start slideshow when loads
-		    showFilmstrip: true,	    // false = hide filmstrip
-		    showFilmstripToggle: false,	    // true = auto show button that allows hide of filmstrip
-		    showButtons: true,		    // false = hide button bar
-		    showExitButton: true,	    // false = hide exit button on the button bar
-		    showZoomButtons: true,	    // false = hide the zoom in out reset buttons
-		    showPlayPauseButton: true,	    // false = hide play / pause button, true = show play / pause button
-		    showFullScreenButton: true,	    // show fullscreen button
-		    showDownloadButton: false,	    // requires a link
-		    showPrintButton: false,	    // 
-		    showOtherButton: false,	    // requires a link - custom use: e.g. Purchase, Feedback, ...
-		    showLocateButton: false,	    // requires a link
-		    showFirstLastButtons: true,	    // false = hide first and last buttons
-		    showText: true,		    // false = hide text
-		    linesOfText: 2,		    // number of lines of text to display for each image
-		    resizable: false,		    // true = shows a resizable triangle at bottom right and right and bottom edges are hot targets for resizing
-		    draggable: false,		    // true = show a handle bar at top which allows dragging
-		    escapeKeyCloses: false,	    // true = escape key closes slideshow
-		    arrowKeysNavigate: false,	    // true = left and right arrow keys will navigate previous and next slide
-		    zoomMode: "zoom",		    // valid values: "zoom", "magnifier"
-		    initMagZoom: 4,				// initial zoom level 4 = 200%	
-		    magnifierSize: {height: 200, width: 200},	// dimensions of magnifier window
-		    divExternalMagnifier: undefined,		// div to hold imgCopy if magnifier for external viewing
-		    magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
-		    cbCreate: undefined,			// callback when slideshow is created
-		    cbClose: undefined,				// callback when slideshow closes
-		    wrapperBackground: "rgb(70,70,70)",		// background of wrapper
-		    wrapperBorder: "1px solid grey",		// rgb(128,128,128)
-		    opaquePosition: "absolute",			// fixed = cover entire screen; absolute = only cover container
-		    opaqueBackground: "rgb(70,70,70,1)",	// background of opque layer
-		    opaqueEdge: 0,				// distance around the opaque layer
-		    imageBorder: "2px solid white",		// border of the large slideshow image
-		    filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
-		    filmstripImageBorder: "2px solid white",    // border of the filmstrip images
-		    filmstripImageHeight: 90,
-		    waitAnimation: 0		    // wait animation to play when load
-		};
-		 */
 	    }
 	    function customSettings() {
 		var settings = {};
@@ -1104,14 +1109,4 @@
 	    }, 10)
 	});
     </script>
-    <!--
-	    // other options
-	    container			// if set, will use to host slide show. if not set, will use document.body
-	    divExternalMagnifier	// div to hold imgCopy if using external magnifier
-	    cbCreate: undefined,	// callback when slideshow is created
-	    cbClose: undefined,		// callback when slideshow closes
-	    initZoom = 2;		// default = 1 (100%)	- start zoom level
-	    initMagZoom = 4;		// start magnifier zoom at 400%
-    
-    -->
 </html>
