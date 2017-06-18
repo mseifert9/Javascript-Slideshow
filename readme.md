@@ -96,6 +96,8 @@ waitAnimation | 0 | (integer) Wait animation to play when loading the first imag
 
 
 #### Other Options (these cannot be set through the demo interface - except through entering the code directly)
+Property | Default | Description
+--- | --- | ---
 container | undefined | The container element to use for the slideshow. If not set, will use `document.body`
 cbCreate | undefined | A callback when the slideshow is created
 cbClose | undefined | A callback when slideshow closes
@@ -134,6 +136,11 @@ ss.init(files, currentSlide);
 ````
 
 #### Screenshots
+<a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="300"></a>
+<a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="300"></a>
+<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="300"></a>
+
+#### Demo and Slideshow Configuration Tool
 <a href="/img-demo/screenshot-demo-1.jpg"><img src="/img-demo/screenshot-demo-1.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-2.jpg"><img src="/img-demo/screenshot-demo-2.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-3.jpg"><img src="/img-demo/screenshot-demo-3.jpg" align="left" height="300"></a>
@@ -141,10 +148,6 @@ ss.init(files, currentSlide);
 <a href="/img-demo/screenshot-demo-5.jpg"><img src="/img-demo/screenshot-demo-5.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a>
-<a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="300"></a>
-<a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="300"></a>
-<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="300"></a>
-</div>
 
 ### The Files:
 ###### slideshow-demo.php
