@@ -6,11 +6,6 @@ The demo allows settings of all options and immediately viewing the results as w
 ## Overview
 ### Settings
 Settings are all passed in a single object. Below is a table of the setting property name and a description
-- Make Draggable
-- Make Resizable
-- Use document.body as the container
-- Center the slideshow
-- Resize With Window - automatically adjust the container and image with change in the browser window size
 
 #### Container
 Property | Default | Description
@@ -21,8 +16,8 @@ slideshowHeight | undefined | Dimensions and position of Container
 slideshowWidth | undefined | 
 slideshowTop | undefined |
 slideshowLeft | undefined |
-center | true | center in window and keep centered unless move with drag and drop
-resizeWithWindow | false | If True, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
+center | true | true = center in window on loading. The slideshow will stay centered with a window resize unless moved with drag - drop.
+resizeWithWindow | false | If true, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
 
 #### Show / Hide (Boolean: True shows and False hides the feature)
 Property | Default | Description
@@ -55,7 +50,7 @@ zoomMode | "zoom" | valid values: **"zoom"** = Zoom In Place, **"magnifier"** = 
 divExternalMagnifier | undefined | an optional div to hold a zoomed copy of the image (zoom can be changed by clicking the image, or mouse scroll)
 initMagZoom | 4 | initial magnifier zoom level (4 = 400%) if using magnifier mode
 magnifierSize | {height: 200, width: 200} | Dimensions of the magnifier window to display when using any zoom mode
-magnifierStyles: | {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined} | styles for the external magnifier div (any style can be used)
+magnifierStyles: | undefined | styles for the external magnifier div (any style can be used)
 
 #### Styling Options
 Property | Default | Description
@@ -96,6 +91,8 @@ waitAnimation | 0 | (integer) Wait animation to play when loading the first imag
 
 
 #### Other Options (these cannot be set through the demo interface - except through entering the code directly)
+Property | Default | Description
+--- | --- | ---
 container | undefined | The container element to use for the slideshow. If not set, will use `document.body`
 cbCreate | undefined | A callback when the slideshow is created
 cbClose | undefined | A callback when slideshow closes
@@ -133,21 +130,19 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div><div>Demo and Settings Code Generator</div>
-<a href="/img-demo/screenshot-demo.jpg"><img src="/img-demo/screenshot-demo.jpg" align="left" height="500"></a>
-</div>
-<div><div>With All Default Settings</div>
-<a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
-</div>
-<div><div>Wth External Magnifier</div>
-<a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="400"></a>
-</div>
-<div><div>With Floating Option</div>
-<a href="/img-demo/screenshot-slideshow-floating.jpg"><img src="/img-demo/screenshot-slideshow-floating.jpg" align="left" height="400"></a>
-</div>
-<div style="display:inline-block;"><div>Custom Background, 80% Opacity, Draggable, Resizable</div>
-<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="400"></a>
-</div>
+#### Screenshots
+<a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="300"></a>
+<a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="300"></a>
+<a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="300"></a>
+
+#### Demo and Slideshow Configuration Tool
+<a href="/img-demo/screenshot-demo-1.jpg"><img src="/img-demo/screenshot-demo-1.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-2.jpg"><img src="/img-demo/screenshot-demo-2.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-3.jpg"><img src="/img-demo/screenshot-demo-3.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-4.jpg"><img src="/img-demo/screenshot-demo-4.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-5.jpg"><img src="/img-demo/screenshot-demo-5.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" height="300"></a>
+<a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" height="300"></a>
 
 ### The Files:
 ###### slideshow-demo.php
