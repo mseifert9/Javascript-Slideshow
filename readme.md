@@ -141,13 +141,15 @@ ss.init(files, currentSlide);
 <p><a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="300"></a></p>
 
 #### Demo and Slideshow Configuration Tool
-<p><a href="/img-demo/screenshot-demo-1.jpg"><img src="/img-demo/screenshot-demo-1.jpg" align="left" height="300"></a></p>
+<div style="width:100%">
+<a href="/img-demo/screenshot-demo-1.jpg"><img src="/img-demo/screenshot-demo-1.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-2.jpg"><img src="/img-demo/screenshot-demo-2.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-3.jpg"><img src="/img-demo/screenshot-demo-3.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-4.jpg"><img src="/img-demo/screenshot-demo-4.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-5.jpg"><img src="/img-demo/screenshot-demo-5.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" align="left" height="300"></a>
-<p><a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a></p>
+<a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a>
+</div>
 
 ### The Files:
 ###### slideshow-demo.php
