@@ -133,21 +133,14 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div><div>Demo and Settings Code Generator</div>
-<a href="/img-demo/screenshot-demo1.jpg"><img src="/img-demo/screenshot-demo1.jpg" align="left" height="400"></a>
-</div>
-<div>
-<a href="/img-demo/screenshot-demo2.jpg"><img src="/img-demo/screenshot-demo2.jpg" align="left" height="400"></a>
-</div>
-<div>
-<a href="/img-demo/screenshot-demo3.jpg"><img src="/img-demo/screenshot-demo3.jpg" align="left" height="400"></a>
-</div>
-<div>
-<a href="/img-demo/screenshot-demo4.jpg"><img src="/img-demo/screenshot-demo4.jpg" align="left" height="400"></a>
-</div>
-<a href="/img-demo/screenshot-demo5.jpg"><img src="/img-demo/screenshot-demo5.jpg" align="left" height="400"></a>
-<a href="/img-demo/screenshot-demo6.jpg"><img src="/img-demo/screenshot-demo6.jpg" align="left" height="400"></a>
-<a href="/img-demo/screenshot-demo7.jpg"><img src="/img-demo/screenshot-demo7.jpg" align="left" height="400"></a>
+<div>Demo and Settings Code Generator</div>
+<a href="/img-demo/screenshot-demo-1.jpg"><img src="/img-demo/screenshot-demo-1.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-2.jpg"><img src="/img-demo/screenshot-demo-2.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-3.jpg"><img src="/img-demo/screenshot-demo-3.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-4.jpg"><img src="/img-demo/screenshot-demo-4.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-5.jpg"><img src="/img-demo/screenshot-demo-5.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" align="left" height="400"></a>
+<a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="400"></a>
 
 <div><div>With All Default Settings</div>
 <a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
