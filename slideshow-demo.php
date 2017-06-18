@@ -11,6 +11,10 @@
 		font-size: 62.5%;
 		font-family: verdana,arial,sans-serif;
 	    }
+	    .container{
+		height: 600px;
+		width: 600px;
+	    }
 	    .tab-div {
 		width: 100%;
 		height: 100%;
@@ -19,7 +23,7 @@
 	    .tab-container {
 		margin-top: 20px;
 		margin-bottom: 5px;
-		width: 425px !important;
+		width: 400px !important;
 		min-height: 400px;
 		height: 600px;
 		border: 1px solid black;
@@ -36,8 +40,26 @@
 	    .tab-container tr {
 		line-height: 20px; 
 	    }
+	    .content {
+		position: relative;
+	    }
+	    #ss-pinned-area{
+		border: 1px solid black;
+		position: absolute;
+		width: 400px;
+	    }
+	    #ss-pinned-area > div{
+		background: rgb(200,200,200);
+		margin-bottom: 5px
+	    }
+	    #ss-pinned-area > div:last-of-type{
+	       margin-bottom:0;
+	    }	    
 	    #div-code-content > textarea {
 		height: 550px;
+		width:98%; 
+		max-width:98%;
+		min-width:98%
 	    }
 	    
 	    #demo {
@@ -178,50 +200,49 @@
 		slideshowWidth: undefined,
 		slideshowTop: undefined,	    // positioning for existing container
 		slideshowLeft: undefined,
-		slideshowCenter: false,	    // true = center in window
+		slideshowCenter: false,		    // true = center in window
 		slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
-		slideshowWrap: false,	    // go back to the beginning when reached the end of the images
-		ssTransitionSeconds: 1,	    // seconds for move slide transition
-		ssTransitionEffect: 1,	    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
+		slideshowWrap: false,		    // go back to the beginning when reached the end of the images
+		ssTransitionSeconds: 1,		    // seconds for move slide transition
+		ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
 		ssPaddingTop: 5,		    // minimum padding between image and top of container
-		container: undefined,	    // if set, will use to host slide show. if not set, will use document.body
+		container: undefined,		    // if set, will use to host slide show. if not set, will use document.body
 		resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
 		playOnEnter: false,		    // true = will start slideshow when loads
-		showFilmstrip: true,	    // false = hide filmstrip
+		showFilmstrip: true,		    // false = hide filmstrip
 		showFilmstripToggle: false,	    // true = auto show button that allows hide of filmstrip
 		showButtons: true,		    // false = hide button bar
-		showExitButton: true,	    // false = hide exit button on the button bar
-		showZoomButtons: true,	    // false = hide the zoom in out reset buttons
+		showExitButton: true,		    // false = hide exit button on the button bar
+		showZoomButtons: true,		    // false = hide the zoom in out reset buttons
 		showPlayPauseButton: true,	    // false = hide play / pause button, true = show play / pause button
 		showFullScreenButton: true,	    // show fullscreen button
 		showDownloadButton: false,	    // requires a link
-		showPrintButton: false,	    // 
-		showOtherButton: false,	    // requires a link - custom use: e.g. Purchase, Feedback, ...
+		showPrintButton: false,
+		showOtherButton: false,		    // requires a link - custom use: e.g. Purchase, Feedback, ...
 		showLocateButton: false,	    // requires a link
 		showFirstLastButtons: true,	    // false = hide first and last buttons
-		showText: true,		    // false = hide text
-		linesOfText: 2,		    // number of lines of text to display for each image
+		showText: true,			    // false = hide text
+		linesOfText: 2,			    // number of lines of text to display for each image
 		resizable: false,		    // true = shows a resizable triangle at bottom right and right and bottom edges are hot targets for resizing
 		draggable: false,		    // true = show a handle bar at top which allows dragging
-		escapeKeyCloses: false,	    // true = escape key closes slideshow
+		escapeKeyCloses: false,		    // true = escape key closes slideshow
 		arrowKeysNavigate: false,	    // true = left and right arrow keys will navigate previous and next slide
 		zoomMode: "zoom",		    // valid values: "zoom", "magnifier"
 		initMagZoom: 4,				// initial zoom level 4 = 200%	
 		magnifierSize: {height: 200, width: 200},	// dimensions of magnifier window
 		divExternalMagnifier: undefined,		// div to hold imgCopy if magnifier for external viewing
 		magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
-		cbCreate: undefined,			// callback when slideshow is created
+		cbCreate: undefined,				// callback when slideshow is created
 		cbClose: undefined,				// callback when slideshow closes
 		wrapperBackground: "rgb(70,70,70)",		// background of wrapper
 		wrapperBorder: "1px solid grey",		// rgb(128,128,128)
 		opaquePosition: "absolute",			// fixed = cover entire screen; absolute = only cover container
-		opaqueBackground: "rgb(70,70,70,1)",	// background of opque layer
-		opaqueEdge: 0,				// distance around the opaque layer
-		imageBorder: "2px solid white",		// border of the large slideshow image
-		filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
-		filmstripImageBorder: "2px solid white",    // border of the filmstrip images
+		opaqueBackground: "rgb(70,70,70,1)",		// background of opque layer
+		imageBorder: "2px solid white",			// border of the large slideshow image
+		filmstripBackground: "rgb(170,170,170)",	// background of filmstrip (#AAA)
+		filmstripImageBorder: "2px solid white",	// border of the filmstrip images
 		filmstripImageHeight: 90,
-		waitAnimation: 0		    // wait animation to play when load
+		waitAnimation: 0				// wait animation to play when load
 	    };
 	    Settings which cannot be set with this interface
 	    container		// if set, will use to host slide show. if not set, will use document.body
@@ -229,7 +250,7 @@
 	    cbCreate: undefined,	// callback when slideshow is created
 	    cbClose: undefined,	// callback when slideshow closes
 	     */
-	    function getSettings(custom, keepCustom){
+	    function getSettings(custom){
 		// start with defaults
 		var defaultSettings = $msRoot.Slideshow.getDefaultSettings();
 		//  add presets
@@ -237,15 +258,10 @@
 		var settings = $ms.cloneSettings(defaultSettings, preset);
 		if (typeof custom == "object"){
 		    // passed settings from runCode
-		} else if (custom || keepCustom) {
+		} else if (custom) {
 		    // add custom settings from inputs
 		    custom = customSettings(true);
 		    settings = $ms.cloneSettings(settings, custom);
-		}
-		if (keepCustom){
-		    // apply presets over custom
-		    var preset = presetSettings();
-		    settings = $ms.cloneSettings(settings, preset);
 		}
 		return settings;
 	    }
@@ -253,6 +269,8 @@
 		var settings = {};
 		var option = document.querySelector('input[name="preset"]:checked').value;
 		settings.container = document.getElementById("container");
+		var saveMagnifierStyles = settings.magnifierStyles;
+		settings.magnifierStyles = undefined;	//reset
 		switch (option) {
 		    case "body":
 			// all other setting default
@@ -271,11 +289,10 @@
 			settings.wrapperBackground = "transparent";
 			settings.wrapperBorder = "0px solid grey";
 			settings.filmstripBackground = "transparent";
-			settings.opaqueEdge = 20;
 			settings.opaqueBackground = "rgba(70,70,70,.98)";
 			break;
 		    case "fullscreen":
-			settings.container = undefined;	    // use document.body
+			settings.container = document.body;
 			settings.showFilmstripToggle = false;
 			settings.resizeWithWindow = true;
 			break;
@@ -298,11 +315,7 @@
 			settings.magnifierStyles = {top: "10px", left: "625px", width: "600px", height: "600px", border: "1px solid black"};
 			break;
 		    case "default":
-			if ($ms.$("ss-keep-custom").checked){
-			    settings = {};
-			} else {
-			    settings = $msRoot.Slideshow.getDefaultSettings();
-			}
+			settings = $msRoot.Slideshow.getDefaultSettings();			
 			break;
 		}
 		if ($ms.$("ss-preserve-colors").checked){
@@ -315,8 +328,8 @@
 		    settings.opaqueBackground = $ms.$("ss-opaque-background").value;
 		    settings.filmstripImageBorder = toNumeric($ms.$("ss-filmstrip-image-border-px").value) + "px solid " + $ms.$("ss-filmstrip-image-border-color").value;
 		    settings.imageBorder = toNumeric($ms.$("ss-image-border-px").value) + "px solid " + $ms.$("ss-image-border-color").value;
-		    settings.magnifierStyles = {};
-		    settings.magnifierStyles.border = toNumeric($ms.$("ss-mag-border-px").value) + "px solid " + $ms.$("ss-mag-border-color").value;
+		    settings.magnifierStyles = saveMagnifierStyles;
+		    // settings.magnifierStyles.border = toNumeric($ms.$("ss-mag-border-px").value) + "px solid " + $ms.$("ss-mag-border-color").value;
 		}
 		return settings;
 	    }
@@ -327,13 +340,14 @@
 		} else {
 		    settings.container = document.getElementById("container");
 		}
+		settings.resizeWithWindow = $ms.$("ss-resize-with-window").checked;
+		settings.slideshowCenter = $ms.$("ss-center").checked;
 		// container or wrapper dimensions
 		settings.slideshowHeight = emptyStringToUndefined($ms.$("ss-height").value);
 		settings.slideshowWidth = emptyStringToUndefined($ms.$("ss-width").value);
 		settings.slideshowTop = emptyStringToUndefined($ms.$("ss-top").value);
 		settings.slideshowLeft = emptyStringToUndefined($ms.$("ss-left").value);
-		settings.slideshowCenter = $ms.$("ss-center").checked;
-		settings.resizeWithWindow = $ms.$("ss-resize-with-window").checked;
+		settings.zIndex = emptyStringToUndefined($ms.$("ss-zindex").value);
 		// show
 		settings.showFilmstrip = $ms.$("ss-show-filmstrip").checked;
 		settings.showFilmstripToggle = $ms.$("ss-show-filmstrip-toggle").checked;
@@ -370,33 +384,43 @@
 			break;
 		}
 		settings.magnifierSize = magSize();
+		var magValueSet = false;
 		settings.divExternalMagnifier = $ms.$("magnifier-output");
 		var top = emptyStringToUndefined($ms.$("ss-ext-mag-top").value);
 		if (typeof top !== "undefined"){
+		    magValueSet = true;
 		    top += "px";
 		}
 		var left = emptyStringToUndefined($ms.$("ss-ext-mag-left").value);
 		if (typeof left !== "undefined"){
+		    magValueSet = true;
 		    left += "px";
 		}
 		var width = emptyStringToUndefined($ms.$("ss-ext-mag-width").value);
 		if (typeof width !== "undefined"){
+		    magValueSet = true;
 		    width += "px";
 		}
 		var height = emptyStringToUndefined($ms.$("ss-ext-mag-height").value);
 		if (typeof height !== "undefined"){
+		    magValueSet = true;
 		    height += "px";
 		}
 		var border = emptyStringToUndefined($ms.$("ss-mag-border-px").value);
 		if (typeof border !== "undefined"){
+		    magValueSet = true;
 		    border += "px solid " + $ms.$("ss-mag-border-color").value;
 		}
-		settings.magnifierStyles = {
-		    top:  top,
-		    left: left,
-		    width: width,
-		    height: height,
-		    border: border
+		if (!magValueSet){
+		    settings.magnifierStyles = undefined;		    
+		} else {
+		    settings.magnifierStyles = {
+			top:  top,
+			left: left,
+			width: width,
+			height: height,
+			border: border
+		    }
 		}
 		function magSize() {
 		    return {
@@ -413,7 +437,6 @@
 		// Opaque Layer 
 		settings.opaquePosition = document.querySelector('input[name="opaque-position"]:checked').value;
 		settings.opaqueBackground = $ms.$("ss-opaque-background").value;
-		settings.opaqueEdge = toNumeric($ms.$("ss-opaque-edge").value);
 		settings.filmstripBackground = $ms.$("ss-filmstrip-background").value;
 		settings.filmstripImageBorder = toNumeric($ms.$("ss-filmstrip-image-border-px").value) + "px solid " + $ms.$("ss-filmstrip-image-border-color").value;
 		settings.filmstripImageHeight = toNumeric($ms.$("ss-filmstrip-image-height").value);
@@ -467,6 +490,7 @@
 	    }
 	    function closeSlideshow(slideshowInstance) {
 		var container = document.getElementById("container");
+		container.style.position = "absolute";
 		container.style.left = "10px";
 		container.style.top = "10px";
 		container.style.height = "600px"
@@ -479,23 +503,21 @@
 		ss = undefined;
 	    }
 	    function applySettings(runCodeSettings){
-		// keepCustom = true will apply presets over custom (over default)
-		// keepCustom = false will only apply presets over default
-		var keepCustom = $ms.$("ss-keep-custom").checked;
-		var settings = getSettings(runCodeSettings, keepCustom);
+		var settings = getSettings(runCodeSettings);
 		// apply settings to elements
 		if (settings.container == document.body){
 		    $ms.$("ss-use-body").checked = true;
 		} else {
 		    $ms.$("ss-use-body").checked = false;
 		}
+		$ms.$("ss-resize-with-window").checked = settings.resizeWithWindow;
+		$ms.$("ss-center").checked = settings.slideshowCenter ;
 		// container or wrapper dimensions
 		$ms.$("ss-height").value = undefinedToEmptyString(settings.slideshowHeight);
 		$ms.$("ss-width").value = undefinedToEmptyString(settings.slideshowWidth);
 		$ms.$("ss-top").value = undefinedToEmptyString(settings.slideshowTop);
 		$ms.$("ss-left").value = undefinedToEmptyString(settings.slideshowLeft);
-		$ms.$("ss-center").checked = settings.slideshowCenter ;
-		$ms.$("ss-resize-with-window").checked = settings.resizeWithWindow;
+		$ms.$("ss-zindex").value = undefinedToEmptyString(settings.zIndex);
 		// show
 		$ms.$("ss-show-filmstrip").checked = settings.showFilmstrip;
 		$ms.$("ss-show-filmstrip-toggle").checked = settings.showFilmstripToggle;
@@ -528,13 +550,22 @@
 		} else {
 		    $ms.$("ss-zoom-magnifier-in-place").checked = true;			    
 		}
-		$ms.$("ss-ext-mag-top").value = undefinedToEmptyString(settings.magnifierStyles.top).replace("px", "");
-		$ms.$("ss-ext-mag-left").value = undefinedToEmptyString(settings.magnifierStyles.left).replace("px", "");
-		$ms.$("ss-ext-mag-width").value = undefinedToEmptyString(settings.magnifierStyles.width).replace("px", "");
-		$ms.$("ss-ext-mag-height").value = undefinedToEmptyString(settings.magnifierStyles.height).replace("px", "");
-		var border = getBorder(settings.magnifierStyles.border);
-		$ms.$("ss-mag-border-px").value = border.px;
-		$ms.$("ss-mag-border-color").value = border.color;
+		if (!settings.magnifierStyles){
+		    $ms.$("ss-ext-mag-top").value = "";
+		    $ms.$("ss-ext-mag-left").value = ""
+		    $ms.$("ss-ext-mag-width").value = "";
+		    $ms.$("ss-ext-mag-height").value = "";
+		    $ms.$("ss-mag-border-px").value = "";
+		    $ms.$("ss-mag-border-color").value = "";
+		} else {
+		    $ms.$("ss-ext-mag-top").value = undefinedToEmptyString(settings.magnifierStyles.top).replace("px", "");
+		    $ms.$("ss-ext-mag-left").value = undefinedToEmptyString(settings.magnifierStyles.left).replace("px", "");
+		    $ms.$("ss-ext-mag-width").value = undefinedToEmptyString(settings.magnifierStyles.width).replace("px", "");
+		    $ms.$("ss-ext-mag-height").value = undefinedToEmptyString(settings.magnifierStyles.height).replace("px", "");
+		    var border = getBorder(settings.magnifierStyles.border);
+		    $ms.$("ss-mag-border-px").value = border.px;
+		    $ms.$("ss-mag-border-color").value = border.color;
+		}
 		
 		// styling
 		// Wrapper
@@ -550,7 +581,6 @@
 		    $ms.$("ss-opaque-absolute").checked = true;
 		}
 		$ms.$("ss-opaque-background").value = settings.opaqueBackground;
-		$ms.$("ss-opaque-edge").value = settings.opaqueEdge;
 		$ms.$("ss-filmstrip-background").value = settings.filmstripBackground;
 		var border = getBorder(settings.filmstripImageBorder);
 		$ms.$("ss-filmstrip-image-border-px").value = border.px;
@@ -739,7 +769,7 @@
 		$ms.copyToClipboard(text);
 		$ms.removeClass($ms.$("copy-status"), "display-none");
 		setTimeout(function(){
-		    $ms.addClass($ms.$("copy-status"), "display-none")}.bind(this), 1000);
+		    $ms.addClass($ms.$("copy-status"), "display-none")}, 1000);
 	    }
 	    function startSlideshow(){
 		var settings = getSettings(true);
@@ -818,6 +848,7 @@
 	    }
 	    var tabDivsId = ["div-presets", "div-container", "div-show", "div-zoom", "div-styling", "div-slideshow", "div-code"];
 	    var tabDivs = [];
+	    var pinned = [];
 	    function makeTabs(){
 		var divTabContainer = createTabs(["Presets", "Container", "Show", "Zoom", "Styling", "Slideshow", "Code"]);
 
@@ -826,12 +857,26 @@
 		    // make the divs that go in tabs
 		    var div = document.createElement("div");
 		    div.id = tabDivsId[i];
-		    div.className = "tab-div display-none";
-		    div.appendChild($ms.$(tabDivsId[i] + "-content"))
+		    div.className = "tab-div display-none";		    
+		    div.appendChild($ms.$(tabDivsId[i] + "-content"));
 		    divTabContainer.appendChild(div);
 		    // content is hidden before appended - now can remove class after appending to hidden div
 		    $ms.removeClass($ms.$(tabDivsId[i] + "-content"), "display-none");
+		    
+		    // the pin button
+		    var pin = document.createElement("div");
+		    pin.id = tabDivsId[i] + "-pin";
+		    pin.className = "ms-unpinned-button";
+		    pin.addEventListener("click", 
+			(function(e){
+			    var tab = i;
+			    return function(e){
+				e.stopPropagation();
+				pinTab(tab)
+			}})()
+		    );	    
 		    tabDivs.push(div);
+		    $ms.$(tabDivsId[i] + "-content").appendChild(pin);
 		}
 		$ms.$("settings-wrapper").appendChild(divTabContainer)
 		showTab(0);
@@ -860,6 +905,7 @@
 		      li.className = 'tab-current';
 		    }
 		    ul.appendChild(li);
+		    pinned.push(false);
 		}
 		return tabsDiv;		
 	    }
@@ -888,7 +934,71 @@
 		// show the selected
 		$ms.removeClass(tabDivs[tab], "display-none");
 	    }
-	    
+	    function pinTab(tab){
+		if (pinned[tab]){
+		    // is pinned - unpin
+		    $ms.removeClass($ms.$(tabDivsId[tab] + "-pin"), "ms-pinned-button")
+		    $ms.addClass($ms.$(tabDivsId[tab] + "-pin"), "ms-unpinned-button")
+		    // show the tab
+		    $ms.removeClass($ms.$("ss-demo-tab-" + tab), "display-none");
+		    //restore the contents div to the tab
+		    $ms.$(tabDivsId[tab]).appendChild($ms.$(tabDivsId[tab] + "-content"));
+		    
+		    pinned[tab] = false;
+		    // hide the pinned area if no more pins
+		    var close = true;
+		    for (var i= 0; i < pinned.length; i++){
+			if (pinned[i]){
+			    close = false;
+			    break;
+			}
+		    }
+		    if (close){
+			$ms.addClass($ms.$("ss-pinned-area"), "display-none");
+		    }
+		} else {
+		    // pin
+		    $ms.addClass($ms.$(tabDivsId[tab] + "-pin"), "ms-pinned-button")
+		    $ms.removeClass($ms.$(tabDivsId[tab] + "-pin"), "ms-unpinned-button")
+		    // hide the tab
+		    $ms.addClass($ms.$("ss-demo-tab-" + tab), "display-none");
+		    // show the pinned area
+		    if (!$ms.$("ss-pinned-area")){
+			// fist time creation
+			var ssPinnedArea = document.createElement("div");
+			ssPinnedArea.id = "ss-pinned-area";
+			ssPinnedArea.style.top = parseInt(getComputedStyle($ms.$("settings-wrapper")).getPropertyValue("top")) + 10 + "px";
+			ssPinnedArea.style.left = parseInt(getComputedStyle($ms.$("ss-demo-tab-container")).getPropertyValue("width")) + 5 + "px";
+			$ms.$("settings-wrapper").appendChild(ssPinnedArea);
+		    }		    
+		    //move the contents div to the pinned area
+		    $ms.$("ss-pinned-area").appendChild($ms.$(tabDivsId[tab] + "-content"));
+		    $ms.removeClass($ms.$("ss-pinned-area"), "display-none");
+		    
+		    // show the next tab
+		    pinned[tab] = true;
+		    var found = false
+		    for (var i = tab + 1; i < pinned.length; i++){
+			if (!pinned[i]){
+			    showTab(i);
+			    found = true;
+			    break;
+			}
+		    }
+		    if (!found){
+			for (var i = 0; i < tab; i++){
+			    if (!pinned[i]){
+				showTab(i);
+				break;
+			    }
+			}
+		    }
+		    
+		}
+	    }
+
+	    // ******************************************
+	    // Custom for stand-alone demo
 	    function getFiles(){
 		var path = $ms.sourceFiles.currentDir() + "/img-demo/";
 		return [
@@ -919,11 +1029,11 @@
 	</script>
     </head>
 <div id="demo">
-    <div id="container" class="slideshow"></div>
+    <div id="container" class="container display-none"></div>
     <div id="magnifier-output" class="magnifier"></div>
     <div id="start"><input id="btn-slideshow" type="button" value="Start Slideshow" onclick="startSlideshow()"></div>    
     <div id="settings-wrapper">
-	<div id="div-presets-content" class="display-none">
+	<div id="div-presets-content" class="content">
 	    <h3>Preset Slideshow</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -942,11 +1052,10 @@
 		
 		<tr></tr>
 		<tr><td colspan="4"><input type="checkbox" id="ss-preserve-colors" checked="checked"><label for="ss-preserve-colors">Preserve Colors</label></td></tr>
-		<tr><td colspan="4"><input type="checkbox" id="ss-keep-custom" checked="checked"><label for="ss-keep-custom">Keep All Custom Options (except when necessary not to)</label></td></tr>
 	    </table>
 	</div>
 
-	<div id="div-container-content" class="display-none">
+	<div id="div-container-content" class="content display-none">
 	    <h3>Container</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -956,7 +1065,6 @@
 		    <col style="width:22%;">
 		    <col style="width:28%;">
 		</colgroup>
-		<tr><td colspan="4"><strong>Container:</strong></td></tr>	
 		<tr>
 		    <td colspan="2"><input type="checkbox" id="ss-draggable"><label for="ss-draggable">Make Draggable</label></td>
 		    <td colspan="2"><input type="checkbox" id="ss-resizable"><label for="ss-resizable">Make Resizable</label></td>
@@ -965,7 +1073,7 @@
 		    <td colspan="2"><input type="checkbox" id="ss-use-body"><label for="ss-use-body">Use document.body</label></td>
 		    <td colspan="2"><input type="checkbox" id="ss-center"><label for="ss-center">Center</label></td>
 		</tr>
-		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window</label></td></tr>
+		<tr><td colspan="4"><input id="ss-resize-with-window" type="checkbox"><label for="ss-resize-with-window">Resize With Window (Fullscreen)</label></td></tr>
 		<tr><td colspan="4"></tr>
 		<tr>
 		    <td>Height</td>
@@ -979,10 +1087,14 @@
 		    <td>Left</td>
 		    <td><input id="ss-left" type="input" size=4 value=""></td>
 		</tr>
+		<tr>
+		    <td>z-index</td>
+		    <td><input id="ss-zindex" type="input" size=4 value=""></td>
+		</tr>
 	    </table>
 	</div>
 
-	<div id="div-show-content" class="display-none">
+	<div id="div-show-content" class="content display-none">
 	    <table style="width: 100%">
 		<colgroup>
 		    <col style="width:22%;">
@@ -990,9 +1102,11 @@
 		    <col style="width:22%;">
 		    <col style="width:28%;">
 		</colgroup>
-		<tr><td colspan="4"><strong>Show:</strong></td></tr>	
+		<h3>Show</h3>
+		<hr>
+		<tr><td colspan="4"><strong>Filmstrip & Text:</strong></td></tr>	
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-filmstrip" checked="checked"><label for="ss-show-filmstrip">Filmstrip (thumbnails)</label></td>
-		    <td colspan="2"><input type="checkbox" id="ss-show-filmstrip-toggle" checked="checked"><label for="ss-show-filmstrip-toggle">Filmstrip Toggle Triangle)</label></td></tr>
+		    <td colspan="2"><input type="checkbox" id="ss-show-filmstrip-toggle" checked="checked"><label for="ss-show-filmstrip-toggle">Filmstrip Toggle ◢)</label></td></tr>
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-text" checked="checked"><label for="ss-show-text">Text (up to 2 lines)</label></td>
 		    <td># Lines</td>
 		    <td><input id="ss-number-lines" type="input" size=4 value="2"></td>
@@ -1011,7 +1125,7 @@
 	    </table>
 	</div>
 
-	<div id="div-zoom-content" class="display-none">
+	<div id="div-zoom-content" class="content display-none">
 	    <h3>Zoom</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -1059,7 +1173,7 @@
 	    </table>
 	</div>
 	
-	<div id="div-styling-content" class="display-none">
+	<div id="div-styling-content" class="content display-none">
 	    <h3>Styling</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -1130,7 +1244,7 @@
 	    </table>
 	</div>
 	
-	<div id="div-slideshow-content" class="display-none">
+	<div id="div-slideshow-content" class="content display-none">
 	    <h3>Slideshow, Slide Transitions, Loading Animation</h3>
 	    <hr>
 	    <table style="width: 100%">
@@ -1185,13 +1299,13 @@
 	    </table>
 	</div>
 	
-	<div id="div-code-content" class="display-none">
+	<div id="div-code-content" class="content display-none">
 	    <h3 style="display:inline-block">Code</h3>
 	    <div style="display:inline-block; padding-left:20px"><input type="button" value="Generate" onclick="generateCode()"></div>
-	    <input type="checkbox" id="ss-minimal-code" style="display:inline-block; padding-left:5px"><label for="ss-minimal-code">Minimal</label>
+	    <input type="checkbox" id="ss-minimal-code" style="display:inline-block; padding-left:5px" onclick="generateCode()"><label for="ss-minimal-code">Minimal</label>
 	    <input type="button" value="Test (eval)" style="display:inline-block; padding-left:5px" onclick="runCode()">
 	    <div style="display:inline-block; padding-left:5px"><input type="button" value="Copy" onclick="copyCode()"></div>
-	    <textarea id='options-text' placeholder="" rows="2" style="width:98%; max-width:98%; min-width:98%; height:150px"></textarea>
+	    <textarea id='options-text' placeholder="" rows="2"></textarea>
 	    <div id='options-text-json' class="display-none"></div>
 	    <div id="copy-status" class="display-none">Copied to Clipboard</div>
 	</div>

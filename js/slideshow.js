@@ -32,6 +32,7 @@ $msRoot.Slideshow = (function(settings){
 	ssTransitionEffect: 1,		    // string or index into ["none", "fade", "h-move", "h-move-fade", "size", "size-fade"]
 	ssPaddingTop: 5,		    // minimum padding between image and top of container
 	container: undefined,		    // if set, will use to host slide show. if not set, will use document.body
+	zIndex: undefined,		    // z-index of container
 	resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
 	playOnEnter: false,		    // true = will start slideshow when loads
 	showFilmstrip: true,		    // false = hide filmstrip
@@ -56,14 +57,13 @@ $msRoot.Slideshow = (function(settings){
 	initMagZoom: 4,			    // initial zoom level 4 = 200%	
 	magnifierSize: {height: 200, width: 200}, // dimensions of magnifier window
 	divExternalMagnifier: undefined,    // div to hold imgCopy if magnifier for external viewing
-	magnifierStyles: {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined},
+	magnifierStyles: undefined,	    // styles to apply to the external magnifier
 	cbCreate: undefined,		    // callback when slideshow is created
 	cbClose: undefined,		    // callback when slideshow closes
 	wrapperBackground: "rgb(70,70,70)", // background of wrapper
 	wrapperBorder: "1px solid grey",    // rgb(128,128,128)
 	opaquePosition: "absolute",	    // fixed = cover entire screen; absolute = only cover container
 	opaqueBackground: "rgb(70,70,70,1)",	    // background of opque layer
-	opaqueEdge: 0,			    // distance around the opaque layer
 	imageBorder: "2px solid white",		    // border of the large slideshow image
 	filmstripBackground: "rgb(170,170,170)",    // background of filmstrip (#AAA)
 	filmstripImageBorder: "2px solid white",    // border of the filmstrip images
@@ -157,6 +157,7 @@ $msRoot.Slideshow = (function(settings){
 	this.filmstripState = "visible";
 	this.$resizable;
 	this.filmstripImageBorderWidth = 0;
+	this.dropped = false;	    // flag if moved (so won't try to keep centered)
 	
 	this.settings = $ms.cloneSettings(Slideshow.getDefaultSettings(), settings);
 	// conversion to integer in case pass text
@@ -173,8 +174,8 @@ $msRoot.Slideshow = (function(settings){
     }
     
     Slideshow.prototype.resize = function(){
-	WINDOW_SCROLLBAR_HEIGHT = 5;	   // fudge
-	WINDOW_SCROLLBAR_WIDTH = 0;
+	WINDOW_SCROLLBAR_HEIGHT = 10;	   // fudge
+	WINDOW_SCROLLBAR_WIDTH = 10;
 	var resizeHandleHeight = this.settings.resizable ? 6 : 0;
 
 	// when zoomed on phone, the innerHeight / innerWidth gets very small, but clientWidth / clientHeight stays relatively normal
@@ -207,20 +208,39 @@ $msRoot.Slideshow = (function(settings){
 	if (!this.settings.showButtons){
 	    BUTTON_DIV_HEIGHT = 0;
 	}
-
-	// without filmstrip buttons, text, padding, 
-	// minimum dimensions are 300 x 300
 	ABSOLUTE_MIN_SLIDESHOW_HEIGHT = 100 + TEXTHEIGHT + BUTTON_DIV_HEIGHT + FILMSTRIP_DIVHEIGHT + titleBarHeight + resizeHandleHeight;
-	if (this.isFullScreen || this.settings.resizeWithWindow) {
+
+	if (this.settings.container !== document.body && this.settings.container.offsetParent){
+	    var offsetParentRect = this.settings.container.offsetParent.getBoundingClientRect();
+	}
+	
+	if (this.isFullScreen) {
 	    SLIDESHOW_WIDTH = windowWidth;
 	    SLIDESHOW_HEIGHT = windowHeight;
+	} else if (this.settings.resizeWithWindow) {
+	    // When container = document.body it fills window
+	    // When container !== document.body it "Fills Available"
 	    if (this.$resizable && this.$resizable.resizing){
 		// resizing changes settings
 		SLIDESHOW_WIDTH = parseInt(this.settings.container.style.width);
 		SLIDESHOW_HEIGHT = parseInt(this.settings.container.style.height);
-	    } else if (!this.isFullScreen && (!this.$resizable || !this.$resizable.resizing)) {
-		this.settings.container.style.width = SLIDESHOW_WIDTH + "px";
-		this.settings.container.style.height = SLIDESHOW_HEIGHT + "px";
+	    } else  {
+		if (this.settings.container == document.body){
+		    SLIDESHOW_WIDTH = windowWidth;
+		    SLIDESHOW_HEIGHT = windowHeight;		    
+		} else {
+		    // adjust width / height for space available based on container's parents
+		    this.settings.container.style.left = "0";
+		    this.settings.container.style.top = "0";
+		    this.divWrapper.style.margin = "initial";
+		    // adjust if container has a left or top due to parent's border or padding
+		    var rectOffsetParent = this.settings.container.offsetParent.getBoundingClientRect();
+		    var rectContainer = this.settings.container.getBoundingClientRect();
+		    SLIDESHOW_WIDTH =  Math.min(windowWidth, offsetParentRect.width - rectOffsetParent.left);
+		    SLIDESHOW_HEIGHT = Math.min(windowHeight, offsetParentRect.height - rectOffsetParent.top);
+		    this.settings.container.style.width = SLIDESHOW_WIDTH + "px";
+		    this.settings.container.style.height = SLIDESHOW_HEIGHT + "px";
+		}
 	    }
 	} else if (this.settings.container !== document.body){
 	    // Warning: these change passed container
@@ -228,20 +248,19 @@ $msRoot.Slideshow = (function(settings){
 		// resizing changes settings
 		this.settings.slideshowHeight = parseInt(this.settings.container.style.height);
 		this.settings.slideshowWidth = parseInt(this.settings.container.style.width);
-	    } else if (this.settings.slideshowHeight){
+	    } else {
+		if (this.settings.slideshowHeight){
 		this.settings.container.style.height = this.settings.slideshowHeight + "px";
+		}
+		if (this.settings.slideshowWidth){
+		    this.settings.container.style.width = this.settings.slideshowWidth + "px";
+		}
 	    }
-	    if (this.settings.slideshowWidth){
-		this.settings.container.style.width = this.settings.slideshowWidth + "px";
-	    }
-	    if (this.settings.slideshowCenter){
-		var style = getComputedStyle(this.settings.container);
-		this.settings.container.style.position = "absolute";
-		this.settings.container.style.top = "0";
-		this.settings.container.style.bottom = "0";
-		this.settings.container.style.left = "0";
-		this.settings.container.style.right = "0";
-		this.settings.container.style.margin = "auto";
+	    if (this.settings.slideshowCenter && !this.dropped){
+		// center the container
+		var rect = this.settings.container.getBoundingClientRect();
+		this.settings.container.style.left = (windowWidth - rect.width) / 2 + "px";
+		this.settings.container.style.top = (windowHeight - rect.height) / 2 + "px";
 	    } else {
 		if (typeof this.settings.slideshowLeft !== "undefined" &&
 			this.settings.slideshowLeft !== "" &&
@@ -264,7 +283,9 @@ $msRoot.Slideshow = (function(settings){
 	    if (rect.width < ABSOLUTE_MIN_SLIDESHOW_WIDTH){
 		this.settings.container.style.width = ABSOLUTE_MIN_SLIDESHOW_WIDTH + "px";
 	    }
-	    if (this.settings.container.style.position !== "relative" && this.settings.container.style.position !== "absolute"){
+	    if (this.settings.container.style.position !== "relative" && 
+		    this.settings.container.style.position !== "absolute" && 
+		    this.settings.container.style.position !== "fixed"){
 		this.settings.container.style.position = "relative";
 	    }
 	} else {
@@ -359,10 +380,15 @@ $msRoot.Slideshow = (function(settings){
 	// outer most divs for slideshow
 	if (typeof this.settings.container == "undefined"){
 	    this.settings.container = document.body;
-	} else if (typeof this.settings.container == "string"){
-	    this.settings.container = $ms.$(this.settings.container);
 	} else {
-	    this.settings.container = this.settings.container;
+	    if (typeof this.settings.container == "string"){
+		this.settings.container = $ms.$(this.settings.container);
+	    } else {
+		this.settings.container = this.settings.container;
+	    }
+	    if (typeof this.settings.zIndex !== "undefined"){
+		this.settings.container.style.zIndex = this.settings.zIndex;
+	    }
 	}
 	var opaque = $ms.$(this.id + 'opaque');
 	if (opaque){
@@ -376,13 +402,6 @@ $msRoot.Slideshow = (function(settings){
 	opaque.className = "ss-opaque";
 	opaque.style.background = this.settings.opaqueBackground;
 	opaque.style.position = this.settings.opaquePosition;
-	if (this.settings.opaqueEdge > 0){
-	    opaque.style.top = this.settings.opaqueEdge + "px";
-	    opaque.style.left = this.settings.opaqueEdge + "px";
-	    opaque.style.bottom = this.settings.opaqueEdge + "px";
-	    opaque.style.right = this.settings.opaqueEdge + "px";
-	    opaque.style.border = Math.max(1, Math.min(5, this.settings.opaqueEdge)) + "px inset " + this.settings.opaqueBackground;
-	}
 	this.settings.container.appendChild(opaque);
 
 	this.divWrapper = document.createElement('div');
@@ -395,7 +414,7 @@ $msRoot.Slideshow = (function(settings){
 	// append to body  - opaque is transparent and if appended to opaque, would inherit transparent
 	this.settings.container.appendChild(this.divWrapper);
 
-	if (this.settings.draggable && this.settings.container !== document.body){
+	    if (this.settings.draggable && this.settings.container !== document.body){
 	    var divTitleBar = document.createElement("div");
 	    divTitleBar.id = this.id + "title-bar";
 	    divTitleBar.className = "ms-title-bar ss-titlebar";
@@ -419,6 +438,7 @@ $msRoot.Slideshow = (function(settings){
 		handle: this.id + "title-bar",
 		cbDrop: function(){
 		    // if was centered, allow to be moved without interfence
+		    this.dropped = true;	//set flag that moved from inital position (in case centering)
 		    this.settings.container.style.removeProperty("bottom");
 		    this.settings.container.style.removeProperty("right");
 		    this.settings.container.style.removeProperty("margin");
