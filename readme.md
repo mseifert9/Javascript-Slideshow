@@ -21,8 +21,8 @@ slideshowHeight | undefined | Dimensions and position of Container
 slideshowWidth | undefined | 
 slideshowTop | undefined |
 slideshowLeft | undefined |
-slideshowCenter | false | true = center in window
-resizeWithWindow | false | If True, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
+slideshowCenter | false | true = center in window on loading. The slideshow will stay centered with a window resize unless moved with drag - drop.
+resizeWithWindow | false | If true, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
 
 #### Show / Hide (Boolean: True shows and False hides the feature)
 Property | Default | Description
@@ -55,7 +55,7 @@ zoomMode | "zoom" | valid values: **"zoom"** = Zoom In Place, **"magnifier"** = 
 divExternalMagnifier | undefined | an optional div to hold a zoomed copy of the image (zoom can be changed by clicking the image, or mouse scroll)
 initMagZoom | 4 | initial magnifier zoom level (4 = 400%) if using magnifier mode
 magnifierSize | {height: 200, width: 200} | Dimensions of the magnifier window to display when using any zoom mode
-magnifierStyles: | {top: undefined, left: undefined, width: undefined, height: undefined, border: undefined} | styles for the external magnifier div (any style can be used)
+magnifierStyles: | undefined | styles for the external magnifier div (any style can be used)
 
 #### Styling Options
 Property | Default | Description
