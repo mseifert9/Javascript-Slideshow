@@ -16,7 +16,7 @@ slideshowHeight | undefined | Dimensions and position of Container
 slideshowWidth | undefined | 
 slideshowTop | undefined |
 slideshowLeft | undefined |
-slideshowCenter | false | true = center in window on loading. The slideshow will stay centered with a window resize unless moved with drag - drop.
+center | true | true = center in window on loading. The slideshow will stay centered with a window resize unless moved with drag - drop.
 resizeWithWindow | false | If true, then the image will resize when the browser window resizes. If false then the image will keep its size when the browser window resizes.
 
 #### Show / Hide (Boolean: True shows and False hides the feature)
@@ -64,7 +64,7 @@ opaqueBackground | "rgb(70,70,70,1)" | Background of the opque layer (only visib
 opaqueEdge | 0 | An edge effect - The number of pixels on each side of the opaque layer to leave as a an empty border surrounding it. It will also create a 5px border around the layer if available.
 **Image**|   |
 imageBorder: "2px solid white" | Border of the large slideshow image
-ssPaddingTop | 5 | Minimum padding between the image and the top of the container
+paddingTop | 5 | Minimum padding between the image and the top of the container
 **Filmstrip**|   |
 filmstripBackground | "rgb(170,170,170) | Background of filmstrip
 filmstripImageBorder | "2px solid white" | Border of the filmstrip images
