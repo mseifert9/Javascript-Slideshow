@@ -142,19 +142,14 @@ ss.init(files, currentSlide);
 <a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a>
 
-#### With All Default Settings
+
+#### With Different Options
 -------
 
 <a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
-<div><div>Wth External Magnifier</div>
 <a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="400"></a>
-</div>
-<div><div>With Floating Option</div>
 <a href="/img-demo/screenshot-slideshow-floating.jpg"><img src="/img-demo/screenshot-slideshow-floating.jpg" align="left" height="400"></a>
-</div>
-<div style="display:inline-block;"><div>Custom Background, 80% Opacity, Draggable, Resizable</div>
 <a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="400"></a>
-</div>
 
 ### The Files:
 ###### slideshow-demo.php
