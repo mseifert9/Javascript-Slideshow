@@ -143,7 +143,6 @@ ss.init(files, currentSlide);
 <a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="300"></a>
 <a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="300"></a>
-<a href="/img-demo/screenshot-slideshow-floating.jpg"><img src="/img-demo/screenshot-slideshow-floating.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-slideshow-custom-options.jpg"><img src="/img-demo/screenshot-slideshow-custom-options.jpg" height="300"></a>
 </div>
 
