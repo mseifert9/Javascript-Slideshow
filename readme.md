@@ -6,11 +6,6 @@ The demo allows settings of all options and immediately viewing the results as w
 ## Overview
 ### Settings
 Settings are all passed in a single object. Below is a table of the setting property name and a description
-- Make Draggable
-- Make Resizable
-- Use document.body as the container
-- Center the slideshow
-- Resize With Window - automatically adjust the container and image with change in the browser window size
 
 #### Container
 Property | Default | Description
