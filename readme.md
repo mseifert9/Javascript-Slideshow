@@ -141,10 +141,10 @@ ss.init(files, currentSlide);
 <a href="/img-demo/screenshot-demo-5.jpg"><img src="/img-demo/screenshot-demo-5.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-6.jpg"><img src="/img-demo/screenshot-demo-6.jpg" align="left" height="300"></a>
 <a href="/img-demo/screenshot-demo-7.jpg"><img src="/img-demo/screenshot-demo-7.jpg" align="left" height="300"></a>
-<hr>
-<div><div>With All Default Settings</div>
+------
+##### With All Default Settings
+-------
 <a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
-</div>
 <div><div>Wth External Magnifier</div>
 <a href="/img-demo/screenshot-slideshow-external-magnifier.jpg"><img src="/img-demo/screenshot-slideshow-external-magnifier.jpg" height="400"></a>
 </div>
