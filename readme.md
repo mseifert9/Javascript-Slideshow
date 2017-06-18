@@ -133,27 +133,22 @@ var currentSlide = 0;		// set the first slide to be shown
 ss.init(files, currentSlide);
 ````
 
-<div><div>Demo and Settings Code Generator (Tab 1)</div>
+<div><div>Demo and Settings Code Generator</div>
 <a href="/img-demo/screenshot-demo1.jpg"><img src="/img-demo/screenshot-demo1.jpg" align="left" height="400"></a>
 </div>
-<div><div>Tab2</div>
+<div>
 <a href="/img-demo/screenshot-demo2.jpg"><img src="/img-demo/screenshot-demo2.jpg" align="left" height="400"></a>
 </div>
-<div><div>Tab3</div>
+<div>
 <a href="/img-demo/screenshot-demo3.jpg"><img src="/img-demo/screenshot-demo3.jpg" align="left" height="400"></a>
 </div>
-<div><div>Tab4</div>
+<div>
 <a href="/img-demo/screenshot-demo4.jpg"><img src="/img-demo/screenshot-demo4.jpg" align="left" height="400"></a>
 </div>
-<div><div>Tab5</div>
 <a href="/img-demo/screenshot-demo5.jpg"><img src="/img-demo/screenshot-demo5.jpg" align="left" height="400"></a>
-</div>
-<div><div>Tab6</div>
 <a href="/img-demo/screenshot-demo6.jpg"><img src="/img-demo/screenshot-demo6.jpg" align="left" height="400"></a>
-</div>
-<div><div>Tab7</div>
 <a href="/img-demo/screenshot-demo7.jpg"><img src="/img-demo/screenshot-demo7.jpg" align="left" height="400"></a>
-</div>
+
 <div><div>With All Default Settings</div>
 <a href="/img-demo/screenshot-slideshow-default.jpg"><img src="/img-demo/screenshot-slideshow-default.jpg" height="500"></a>
 </div>
