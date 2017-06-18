@@ -25,12 +25,12 @@ $msRoot.Slideshow = (function(settings){
 	slideshowWidth: undefined,
 	slideshowTop: undefined,	    // positioning for existing container
 	slideshowLeft: undefined,
-	slideshowCenter: false,		    // true = center in window
+	center: true,			    // true = center in window and keep centered unless move with drag drop
 	slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
 	slideshowWrap: false,		    // go back to the beginning when reached the end of the images
 	ssTransitionSeconds: 1,		    // seconds for move slide transition
 	ssTransitionEffect: 1,		    // string or index into ["none", "fade", "h-move", "h-move-fade", "size", "size-fade"]
-	ssPaddingTop: 5,		    // minimum padding between image and top of container
+	paddingTop: 5,			    // minimum padding between image and top of container
 	container: undefined,		    // if set, will use to host slide show. if not set, will use document.body
 	zIndex: undefined,		    // z-index of container
 	resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
@@ -256,7 +256,7 @@ $msRoot.Slideshow = (function(settings){
 		    this.settings.container.style.width = this.settings.slideshowWidth + "px";
 		}
 	    }
-	    if (this.settings.slideshowCenter && !this.dropped){
+	    if (this.settings.center && !this.dropped){
 		// center the container
 		var rect = this.settings.container.getBoundingClientRect();
 		this.settings.container.style.left = (windowWidth - rect.width) / 2 + "px";
@@ -1501,7 +1501,7 @@ $msRoot.Slideshow = (function(settings){
 	    this.largeSize[i].displayHeight = parseInt(this.largeSize[i].displayWidth / ratioImage);
 	} else {
 	    // when using max height - adjust for minimum top padding
-	    this.largeSize[i].displayHeight = IMAGE_MAXHEIGHT - this.settings.ssPaddingTop;
+	    this.largeSize[i].displayHeight = IMAGE_MAXHEIGHT - this.settings.paddingTop;
 	    this.largeSize[i].displayWidth = parseInt(this.largeSize[i].displayHeight * ratioImage);
 	}
 

@@ -200,12 +200,12 @@
 		slideshowWidth: undefined,
 		slideshowTop: undefined,	    // positioning for existing container
 		slideshowLeft: undefined,
-		slideshowCenter: false,		    // true = center in window
+		center: true,			    // true = center in window and keep centered unless move with drag drop
 		slideshowInterval: 4000,	    // the interval when slideshow is in auto mode - default to 4 seconds = (3 second pause + 1 second move transition)
 		slideshowWrap: false,		    // go back to the beginning when reached the end of the images
 		ssTransitionSeconds: 1,		    // seconds for move slide transition
 		ssTransitionEffect: 1,		    // index into ["none", "fade", "h-move", "h-move-fade"] or string (e.g. fade)
-		ssPaddingTop: 5,		    // minimum padding between image and top of container
+		paddingTop: 5,			    // minimum padding between image and top of container
 		container: undefined,		    // if set, will use to host slide show. if not set, will use document.body
 		resizeWithWindow: false,	    // true = slideshow & image will resize with window.resize (will override container)
 		playOnEnter: false,		    // true = will start slideshow when loads
@@ -283,7 +283,7 @@
 		    case "floating":
 			// remove borders
 			settings.imageBorder = "0px solid white";
-			settings.slideshowCenter = true;
+			settings.center = true;
 			// background colors blend in opacity full screen mode
 			settings.opaquePosition = "fixed";
 			settings.wrapperBackground = "transparent";
@@ -341,7 +341,7 @@
 		    settings.container = document.getElementById("container");
 		}
 		settings.resizeWithWindow = $ms.$("ss-resize-with-window").checked;
-		settings.slideshowCenter = $ms.$("ss-center").checked;
+		settings.center = $ms.$("ss-center").checked;
 		// container or wrapper dimensions
 		settings.slideshowHeight = emptyStringToUndefined($ms.$("ss-height").value);
 		settings.slideshowWidth = emptyStringToUndefined($ms.$("ss-width").value);
@@ -442,7 +442,7 @@
 		settings.filmstripImageHeight = toNumeric($ms.$("ss-filmstrip-image-height").value);
 		// Image
 		settings.imageBorder = toNumeric($ms.$("ss-image-border-px").value) + "px solid " + $ms.$("ss-image-border-color").value;
-		settings.ssPaddingTop = toNumeric($ms.$("ss-image-padding-top").value);
+		settings.paddingTop = toNumeric($ms.$("ss-image-padding-top").value);
 
 		// Slideshow Flow
 		settings.playOnEnter = $ms.$("ss-play-on-enter").checked;
@@ -511,7 +511,7 @@
 		    $ms.$("ss-use-body").checked = false;
 		}
 		$ms.$("ss-resize-with-window").checked = settings.resizeWithWindow;
-		$ms.$("ss-center").checked = settings.slideshowCenter ;
+		$ms.$("ss-center").checked = settings.center ;
 		// container or wrapper dimensions
 		$ms.$("ss-height").value = undefinedToEmptyString(settings.slideshowHeight);
 		$ms.$("ss-width").value = undefinedToEmptyString(settings.slideshowWidth);
@@ -590,7 +590,7 @@
 		var border = getBorder(settings.imageBorder);
 		$ms.$("ss-image-border-px").value = border.px;
 		$ms.$("ss-image-border-color").value = border.color;
-		$ms.$("ss-image-padding-top").value = settings.ssPaddingTop;
+		$ms.$("ss-image-padding-top").value = settings.paddingTop;
 		// Slideshow Flow
 		$ms.$("ss-play-on-enter").checked = settings.playOnEnter;
 		$ms.$("ss-interval").value = settings.slideshowInterval;
