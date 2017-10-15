@@ -7,6 +7,7 @@ $staticSiteRoot = $_GET['static-site-root'];
 ?>
 
 @charset "utf-8";
+*{padding:0; margin:0;}
 .visibility-hidden {
     visibility: hidden !important;
 }

@@ -3,6 +3,9 @@
 <html>
     <head>
 	<style>
+	    html, body {
+		min-width: 100%;
+	    }	    
 	    html {
 		height: 100% !important;
 	    }
@@ -313,6 +316,9 @@
 			settings.magnifierSize = {height: 100, width: 100};
 			settings.divExternalMagnifier = magnifier;
 			settings.magnifierStyles = {top: "10px", left: "625px", width: "600px", height: "600px", border: "1px solid black"};
+			settings.slideshowLeft = "10";
+			settings.slideshowTop = "10";
+			settings.center = false;
 			break;
 		    case "default":
 			settings = $msRoot.Slideshow.getDefaultSettings();			
@@ -828,6 +834,7 @@
 		    // divClassName: "cp-input",
 		};
 		var cpInput = $ms.createColorPickerInput(settings);
+		cpInput.div.style.display = "inline-block";
 	    }
 	    function updateColor(inputId){
 		var keyboardEvent = document.createEvent("KeyboardEvent");
@@ -1077,19 +1084,19 @@
 		<tr><td colspan="4"></tr>
 		<tr>
 		    <td>Height</td>
-		    <td><input id="ss-height" type="input" size=4 value="600"></td>
+		    <td><input id="ss-height" type="input" size="4" value="600"></td>
 		    <td>Width</td>
-		    <td><input id="ss-width" type="input" size=4 value="600"></td>
+		    <td><input id="ss-width" type="input" size="4" value="600"></td>
 		</tr>
 		<tr>
 		    <td>Top</td>
-		    <td><input id="ss-top" type="input" size=4 value=""></td>
+		    <td><input id="ss-top" type="input" size="4" value=""></td>
 		    <td>Left</td>
-		    <td><input id="ss-left" type="input" size=4 value=""></td>
+		    <td><input id="ss-left" type="input" size="4" value=""></td>
 		</tr>
 		<tr>
 		    <td>z-index</td>
-		    <td><input id="ss-zindex" type="input" size=4 value=""></td>
+		    <td><input id="ss-zindex" type="input" size="4" value=""></td>
 		</tr>
 	    </table>
 	</div>
@@ -1109,7 +1116,7 @@
 		    <td colspan="2"><input type="checkbox" id="ss-show-filmstrip-toggle" checked="checked"><label for="ss-show-filmstrip-toggle">Filmstrip Toggle ◢)</label></td></tr>
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-text" checked="checked"><label for="ss-show-text">Text (up to 2 lines)</label></td>
 		    <td># Lines</td>
-		    <td><input id="ss-number-lines" type="input" size=4 value="2"></td>
+		    <td><input id="ss-number-lines" type="input" size="4" value="2"></td>
 		</tr>
 		<tr><td colspan="4"><strong>Buttons:</strong></td></tr>	
 		<tr><td colspan="2"><input type="checkbox" id="ss-show-buttons" checked="checked"><label for="ss-show-buttons">Buttons Bar</label></td>
@@ -1143,32 +1150,31 @@
 		<tr><td colspan="4"><strong>Internal Magnifier Box:</strong></td></tr>
 		<tr>
 		    <td>Height</td>
-		    <td><input id="ss-int-mag-height" type="input" size=4 value="200"></td>
+		    <td><input id="ss-int-mag-height" type="input" size="4" value="200"></td>
 		    <td>Width</td>
-		    <td><input id="ss-int-mag-width" type="input" size=4 value="200"></td>
+		    <td><input id="ss-int-mag-width" type="input" size="4" value="200"></td>
 		</tr>
 		<tr><td colspan="4"><strong>External Magnifier Box:</strong></td></tr>	
 		<tr>
 		    <td colspan="2">Initial Magnification Level</td>
-		    <td><input id="ss-init-mag-zoom" type="input" size=4 value="4"></td>
+		    <td><input id="ss-init-mag-zoom" type="input" size="4" value="4"></td>
 		    <td>(e.g. 4 = 400%)</td>
 		</tr>
 		<tr>
 		    <td>Height</td>
-		    <td><input id="ss-ext-mag-height" type="input" size=4 value="600"></td>
+		    <td><input id="ss-ext-mag-height" type="input" size="4" value="600"></td>
 		    <td>Width</td>
-		    <td><input id="ss-ext-mag-width" type="input" size=4 value="600"></td>
+		    <td><input id="ss-ext-mag-width" type="input" size="4" value="600"></td>
 		</tr>
 		<tr>
 		    <td>Top</td>
-		    <td><input id="ss-ext-mag-top" type="input" size=4 value="0"></td>
+		    <td><input id="ss-ext-mag-top" type="input" size="4" value="0"></td>
 		    <td>Left</td>
-		    <td><input id="ss-ext-mag-left" type="input" size=4 value="625"></td>
+		    <td><input id="ss-ext-mag-left" type="input" size="4" value="625"></td>
 		</tr>
 		<tr>
 		    <td>Border</td>
-		    <td><input id="ss-mag-border-px" type="input" size=2 value="1"> px</td>
-		    <td colspan="2"><input id="ss-mag-border-color" type="input" value=""></td>
+		    <td colspan="3"><input id="ss-mag-border-px" type="input" size="2" value="1"> px solid <input id="ss-mag-border-color" type="input" value=""></td>
 		</tr>
 	    </table>
 	</div>
@@ -1178,20 +1184,19 @@
 	    <hr>
 	    <table style="width: 100%">
 		<colgroup>
-		    <col style="width:22%;">
-		    <col style="width:28%;">
-		    <col style="width:22%;">
-		    <col style="width:28%;">
+		    <col style="width:30%;">
+		    <col style="width:25%;">
+		    <col style="width:25%;">
+		    <col style="width:20%;">
 		</colgroup>
 		<tr><td colspan="4"><strong>Wrapper:</strong></td></tr>	
 		<tr>
-		    <td colspan="2">Background Color</td>
+		    <td>Background Color</td>
 		    <td colspan="2"><input id="ss-wrapper-background" type="input" value="rgb(70,70,70)"></td>
 		</tr>
 		<tr>
 		    <td>Border</td>
-		    <td><input id="ss-wrapper-border-px" type="input" size=2 value="1"> px</td>
-		    <td colspan="2"><input id="ss-wrapper-border-color" type="input" value=""></td>
+		    <td colspan="3"><input id="ss-wrapper-border-px" type="input" size="2" value="1"> px solid <input id="ss-wrapper-border-color" type="input" value=""></td>
 		</tr>
 
 		<tr><td colspan="4"><hr></td></tr>
@@ -1200,45 +1205,43 @@
 		<tr><td colspan="4"><input id="ss-opaque-fixed" type="radio" name="opaque-position" value="fixed" checked="checked"><label for="ss-opaque-fixed">Fixed (Whole screen)</label></tr>
 		<tr><td colspan="4"><input id="ss-opaque-absolute" type="radio" name="opaque-position" value="absolute"><label for="ss-opaque-absolute">Absolute (Container only)</label></tr>
 		<tr>
-		    <td colspan="2">Background Color</td>
+		    <td>Background Color</td>
 		    <td colspan="2"><input id="ss-opaque-background" type="input" value="rgb(70,70,70)"></td>
 		</tr>
 		<tr>
-		    <td colspan="2">Opacity (0 - 1)</td>
+		    <td>Opacity (0 - 1)</td>
 		    <td colspan="2"><input id="ss-opaque-opacity" type="input" value="1">%</td>
 		</tr>
 		<tr>
-		    <td colspan="2">Edge Effect</td>
+		    <td>Edge Effect</td>
 		    <td colspan="2"><input id="ss-opaque-edge" type="input" size="4" value="0">px</td>
 		</tr>
 
 		<tr><td colspan="4"><hr></td></tr>
 		<tr><td colspan="4"><strong>Filmstrip:</strong></td></tr>	
 		<tr>
-		    <td colspan="2">Background Color</td>
+		    <td>Background Color</td>
 		    <td colspan="2"><input id="ss-filmstrip-background" type="input" value="rgb(170,170,170)"></td>
 		</tr>
 		<tr><td colspan="4"><strong>Image</strong></td></tr>
 		<tr>
 		    <td>Border</td>
-		    <td><input id="ss-filmstrip-image-border-px" type="input" size=2 value="2"> px</td>
-		    <td colspan="2"><input id="ss-filmstrip-image-border-color" type="input" value="white"></td>
+		    <td colspan="3"><input id="ss-filmstrip-image-border-px" type="input" size="2" value="2"> px <input id="ss-filmstrip-image-border-color" type="input" value="white"></td>
 		</tr>
 		<tr>
 		    <td>Height</td>
-		    <td colspan="2"><input id="ss-filmstrip-image-height" type="input" size=2 value="90"> px</td>
+		    <td colspan="2"><input id="ss-filmstrip-image-height" type="input" size="2" value="90"> px</td>
 		</tr>
 
 		<tr><td colspan="4"><hr></td></tr>
 		<tr><td colspan="4"><strong>Main Image:</strong></td></tr>	
 		<tr>
 		    <td>Border</td>
-		    <td><input id="ss-image-border-px" type="input" size=2 value="2"> px</td>
-		    <td colspan="2"><input id="ss-image-border-color" type="input" value="white"></td>
+		    <td colspan="3"><input id="ss-image-border-px" type="input" size="2" value="2"> px <input id="ss-image-border-color" type="input" value="white"></td>
 		</tr>
 		<tr>
 		    <td>Top Padding</td>
-		    <td><input id="ss-image-padding-top" type="input" size=2 value="5"> px</td>
+		    <td><input id="ss-image-padding-top" type="input" size="2" value="5"> px</td>
 		</tr>
 
 	    </table>
@@ -1258,14 +1261,14 @@
 		<tr><td colspan="4"><strong>Slideshow:</strong></td></tr>
 		<tr><td colspan="2"><input type="checkbox" id="ss-play-on-enter"><label for="ss-play-on-enter">Play On Enter</label></td>
 		    <td colspan="1">Interval</td>
-		    <td colspan="1"><input id="ss-interval" type="input" size=2 value="4000"> ms</td>
+		    <td colspan="1"><input id="ss-interval" type="input" size="2" value="4000"> ms</td>
 		</tr>
 		<tr><td colspan="4"><input type="checkbox" id="ss-wrap"><label for="ss-wrap">Wrap when at the beginning or end</label></td>
 		</tr>
 		<tr><td colspan="4"><strong>Transitions:</strong></td></tr>
 		<tr>
 		    <td colspan="1">Length</td>
-		    <td colspan="1"><input id="ss-transition-seconds" type="input" size=2 value="1"> seconds</td>
+		    <td colspan="1"><input id="ss-transition-seconds" type="input" size="2" value="1"> seconds</td>
 		</tr>
 		<tr><td colspan="4"><strong>Effect:</strong></td></tr>
 		<tr>

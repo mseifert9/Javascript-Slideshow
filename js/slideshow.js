@@ -1,4 +1,4 @@
-/* Copyright © 2017 Michael Seifert (www.mseifert.com) All Rights Reserved */
+/* Copyright © 2017 Michael Seifert (mseifert.com) All Rights Reserved */
 $msRoot.createNS("Slideshow");
 $msRoot.Slideshow = (function(settings){
     var instance = [];
@@ -827,6 +827,19 @@ $msRoot.Slideshow = (function(settings){
 	    this.sizethumbimage(i, img, divImage);
 	} else if (type == "large"){
 	    this.sizelargeimage(i, img);
+
+	    if (typeof this.files[i].thumb == "undefined"){
+		// if using the large image for the thumb, also set the thumbnail
+		// the load event of the filmstrip img normally gets fired on its own
+		// but there were instances of it not being fired
+		var thumbImg = $ms.$(this.id + "imgthumb-" + i);
+		var thumbDivImg = $ms.$(this.id + "thumb-" + i);
+		if (thumbImg.naturalWidth > 0 && isNaN(parseInt(thumbImg.style.width))){
+		    this.sizethumbimage(i, thumbImg, thumbDivImg);
+		}
+	    }	    
+	    
+	    
 	    this.stopWait();
 	}
     }
@@ -1728,13 +1741,13 @@ $msRoot.Slideshow = (function(settings){
 	img.id = this.id + "imglarge-" + i;
 	img.title = this.title(shortfile);
 	// Load the image
-	img.src = this.files[i].filename;
 	img.style.position = "absolute";
 	// img.style.border = this.settings.imageBorder;
 	// position needed so have initial value for large images
 	img.style.top = "0px";
 	img.style.left = "0px";
 	img.addEventListener('load', function(){this.imgloaded(i, "large", img)}.bind(this));
+	img.src = this.files[i].filename;
 
 	a.appendChild(img);
 

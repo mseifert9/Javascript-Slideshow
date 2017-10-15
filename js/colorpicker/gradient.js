@@ -1,4 +1,4 @@
-/* Copyright © 2017 Michael Seifert (www.mseifert.com) All Rights Reserved */
+/* Copyright © 2017 Michael Seifert (mseifert.com) All Rights Reserved */
 
 $msRoot.createNS("Gradient");
 $msRoot.Gradient = (function (settings) {

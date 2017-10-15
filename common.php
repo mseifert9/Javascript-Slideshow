@@ -1,7 +1,7 @@
 <?php
     /* define paths for php - need both url and absolute paths for each location
-     * LINK_ paths are the urls for the cookie enabled domains - e.g. http://design.mseifert.com/demo
-     * STATIC_ paths are the urls for the cookieless domains - e.g. http://staticdesign.mseifert.com/demo
+     * LINK_ paths are the urls for the cookie enabled domains - e.g. //design.mseifert.com/demo
+     * STATIC_ paths are the urls for the cookieless domains - e.g. //staticdesign.mseifert.com/demo
      * FULL_ paths are the absolute paths which correspond to the urls - e.g. "/home/yourid/public_html/design/demo"
      * _TOP_ROOT is the root of the Server in the domain tree
      * _SITE_ROOT is the root of the Site (domain)
@@ -9,7 +9,7 @@
      *	    SITE_ROOT and TOP_ROOT paths will be the same
      *	    having both SITE_ROOT and TOP_ROOT defined allows pulling files from anywhere on the server for any of its site
      *	    in other words, it allows different sites to share images, js, and css resources
-     * STATIC_IMG_COMMON, STATIC_CSS_COMMON, STATIC_JS_COMMON are default url subdirectories - e.g. http://static-design/demo/img
+     * STATIC_IMG_COMMON, STATIC_CSS_COMMON, STATIC_JS_COMMON are default url subdirectories - e.g. //static-design/demo/img
      * 
      * if root paths are left blank and sub directories are specified for _JS_COMMON, _CSS_COMMON, _IMG_COMMON
      *	    will use the current directory as the relative root for all paths

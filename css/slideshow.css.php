@@ -4,16 +4,6 @@ $staticImgCommon = $_GET['static-img-common'];
 
 ?>
 @charset "utf-8";
-html, body {
-    min-width: 100%;
-    height: initial;
-}
-html, body, div, span, a, img, h1, h2, h3, h4, h5, h6, p, blockquote, pre {
-    border:0; 
-    padding:0; 
-    margin:0;    
-}
-
 .ss-opaque {
     position: fixed;
     top: 0px;

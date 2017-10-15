@@ -3,7 +3,7 @@
  * MIT style license
  * 
  * This colorPicker has been re-written in pure js with a lot of additions
- * Copyright © 2017 Michael Seifert (www.mseifert.com) All Rights Reserved
+ * Copyright © 2017 Michael Seifert (mseifert.com) All Rights Reserved
 */
 
 // target object contains: 
