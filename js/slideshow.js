@@ -2875,17 +2875,24 @@ $msRoot.Slideshow = (function(settings){
 	this.zoom = 1;
     }
     
-    Slideshow.prototype.zoomImageStart = function(zoomIn){
+    Slideshow.prototype.zoomImageStart = function(zoomIn, position){
 	var e = {};
 	// simulate ctrl click if delta is negative
 	// ctrlKey = true is zoom out
 	e.ctrlKey = !zoomIn;
-	// simulate click in the center of the displayed portion of the image
-	var divRect = this.divLarge[this.slide].getBoundingClientRect();
-	var divOffset = $ms.getOffset(this.divLarge[this.slide]);
-	
-	e.pageX = divOffset.x + divRect.width / 2;
-	e.pageY = divOffset.y + divRect.height / 2;
+	if (typeof position !== "undefined"){
+	    // zoom from mousewheel event - position var is passed
+	    e.pageX = position.x;
+	    e.pageY = position.y;
+	} else {
+	    // from click on zoom / magnifier icon
+	    // simulate click in the center of the displayed portion of the image
+	    var divRect = this.divLarge[this.slide].getBoundingClientRect();
+	    var divOffset = $ms.getOffset(this.divLarge[this.slide]);
+
+	    e.pageX = divOffset.x + divRect.width / 2;
+	    e.pageY = divOffset.y + divRect.height / 2;
+	}
 	this.zoomImage(e);
     }
     
